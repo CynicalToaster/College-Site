@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>College Site</title>
+
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
+        <link rel="stylesheet" type="text/css" href="/resources/css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/resources/css/web_structure.css"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <script>
+            window.addEventListener("load", function() {
+                var banner = document.getElementById('banner');
+                console.log(banner);
+                window.addEventListener("scroll", function() {
+                    console.log('scroll');
+                });
+            });
+        </script>
+
+        <style>
+            body {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 13px;
+                font-weight: 500;
+                color: #444;
+            }
+
+            #page {
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                flex-flow: column;
+                min-height: 100%;
+            }
+
+            #header {
+                background-color: #fafafa;
+                box-shadow: 0px 0px 4px -2px #000;
+                z-index: 0;
+                align-items: center;
+            }
+
+            #header-nav {
+                background-color: #f5f5f5;
+                box-shadow: 0px 0px 4px -2px #000;
+            }
+            
+            .header-nav-link {
+                padding: 5px 20px 5px 20px;
+                cursor: pointer;
+                background-color: #f5f5f5;
+                user-select: none;
+                color: #444;
+                text-decoration: none;
+            }
+
+            .header-nav-link:hover {
+                background-color: #e8e8e8;
+            }
+
+            .header-nav-link:active {
+                box-shadow: inset 0px 2px 6px -2px rgba(0,0,0,0.2);
+                background-color: #e0e0e0;
+                color: #777;
+            }
+
+            #content {
+                padding: 20px 0px;
+                flex: 1;
+            }
+
+            #footer {
+                padding: 10px 0px;
+                background-color: #f5f5f5;
+                box-shadow: 0px 0px 4px -2px #000;
+            }
+
+            .logo-medium {
+                padding: 10px;
+                width: 48px;
+                height: 48px;
+            }
+
+            .logo-medium-text {
+                display: flex; 
+                align-items: center;
+                font-family: 'Pacifico', sans-serif;
+                font-size: 20px;
+                color: #666;
+            }
+
+            #banner {
+                position: relative;
+                overflow: hidden;
+                width: 100%;
+                height: 500px;
+            }
+
+            .banner-image {
+                position: absolute;
+                filter: opacity(90%) saturate(0.6);
+                width: 100%;
+                top:-50%;
+                object-fit: cover;
+            }
+
+            #account-login {
+                height: 100%;
+                display: flex; 
+                align-items: center;
+            }
+
+            #account-login a {
+                color: #444;
+                text-decoration:  none;
+                border-bottom: 1px solid rgba(255,255,255,0);
+                transition: 0.6s border-bottom;
+            }
+
+            #account-login a:hover {
+                border-bottom: 1px solid #444;
+                transition: 0.2s border-bottom;
+            }
+
+            #account-login i.fa {
+                margin-right: 5px;
+                font-size: 16px;
+            }
+
+            .popup {
+                display: flex;
+                box-sizing: border-box;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                z-index: 9999;
+
+                /* padding: 5px; */
+                /* background-color: rgba(255,255,255,0.2); */
+                box-shadow: 5px 8px 10px -2px rgba(0,0,0,0.1);
+                /* border-radius: 6px; */
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <div id="login-popup" class="popup hidden">
+                <form method="post">
+                    <div class="panel">
+                        <div class="row">
+                            <h3>Login</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-a5-6">
+                                <input type="text" placeholder="Username" />
+                            </div>
+                            <div class="col-a5-6">
+                                <input type="text" placeholder="Password" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-a5-4">
+                                <input type="submit" value="Login" />
+                            </div>
+                            <div class="col-a5-4">
+                                <input type="reset" value="Cancel" onClick="
+                                    $('#login-popup').addClass('hidden');
+                                "/>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id="header">
+                <div class="row pl-10 pr-10">
+                    <div class="offset-a4-1 col-a4-10">
+                        <div class="offset-a2-2 col-a2-8">
+                            <div class="left">
+                                <img class="logo-medium" src="/resources/images/cynicaltoaster-logo.png"/>
+                                <span class="logo-medium-text">CynicalToaster.com</span>
+                            </div>
+                            <div class="right">
+                                <div id="account-login">
+                                    <i class="fa fa-user-o" aria-hidden="true"></i><a href="#" onClick="
+                                        $('#login-popup').removeClass('hidden');
+                                        return false;
+                                    ">Login / Signup</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="header-nav">
+                <div class="row pl-10 pr-10">
+                    <div class="offset-a4-1 col-a4-10">
+                        <div class="offset-a2-2 col-a2-8">
+                            <div class="left">
+                                <a href="/home" class="header-nav-link">Home</a>
+                                <a href="/bookmarks" class="header-nav-link">Bookmarks</a>
+                            </div>
+                            <div class="right">
+                                <a href="/about" class="header-nav-link">About</a>
+                                <a href="/contact" class="header-nav-link">Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div id="banner">
+                <div class="row">
+                    <img class="banner-image" src="resources/images/background_1.jpg" />
+                </div>
+            </div> -->
+            <div id="content">
+                <div class="row pl-10 pr-10">
+                    <div class="offset-a4-1 col-a4-10">
+                        <div class="offset-a2-2 col-a2-8">
+                            <div class="panel">
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                                <p>Sample text</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="footer">
+                <div class="row pl-10 pr-10">
+                    <div class="offset-a4-1 col-a4-10">
+                        <div class="offset-a2-2 col-a2-8">
+                            FOOTER!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
