@@ -1,0 +1,119 @@
+<div id="login-popup" class="popup hidden">
+    <form method="post">
+        <div class="panel">
+            <div class="row">
+                <h3>Login</h3>
+            </div>
+            <div class="row">
+                <div class="col-a5-6">
+                    <input type="text" placeholder="Username" />
+                </div>
+                <div class="col-a5-6">
+                    <input type="text" placeholder="Password" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-a5-4">
+                    <input type="submit" value="Login" />
+                </div>
+                <div class="col-a5-4">
+                    <input type="reset" value="Cancel" onClick="
+                        $('#login-popup').addClass('hidden');
+                    "/>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div id="header">
+    <div class="row pl-10 pr-10">
+        <div class="offset-a4-1 col-a4-10">
+            <div class="offset-a2-2 col-a2-8">
+                <div class="left pl-20" onClick="
+                    $('#header-nav-mobile').css({left: '0px'});
+                ">
+                    <p>///</p>
+                </div>
+                <div class="left">
+                    <img class="logo-medium" src="/site/resources/images/cynicaltoaster-logo.png" alt="Logo" />
+                    <span class="logo-medium-text">CynicalToaster.com</span>
+                </div>
+                <div class="right">
+                    <div id="account-login">
+                        <i class="fa fa-user-o" aria-hidden="true"></i><a href="#" onClick="
+                            $('#login-popup').removeClass('hidden');
+                            return false;
+                        ">Login / Signup</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div id="header-nav">
+
+    <script>
+
+    </script>
+
+    <style>
+        #header-nav-mobile {
+            position: fixed;
+            top: 0px;
+            left: -100%;
+            height: 100%;
+            background-color: #fafafa;
+            box-shadow: 0px 0px 4px -2px #000;
+
+            transition: 1s left;
+        }
+    </style>                 
+    
+    <div id="header-nav-desktop" class="">
+        <div class="row pl-10 pr-10">
+            <div class="offset-a4-1 col-a4-10">
+                <div class="offset-a2-2 col-a2-8">
+                    <div class="left">
+                        <a href="/home" class="header-nav-link">Home</a>
+                        <a href="/bookmarks" class="header-nav-link">Bookmarks</a>
+                        <a href="/projects" class="header-nav-link">Projects</a>
+                    </div>
+                    <div class="right">
+                        <a href="/about" class="header-nav-link">About</a>
+                        <a href="/contact" class="header-nav-link">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="header-nav-mobile" class="">
+
+        <div class="row" style="box-shadow: 0px 0px 4px -2px #000;">
+            <div class="left pl-20" style="cursor: pointer;" onClick="
+                $('#header-nav-mobile').css({left: '-100%'});
+            ">
+                <p>///</p>
+            </div>
+            <div class="left pl-10">
+                <img class="logo-medium" src="/site/resources/images/cynicaltoaster-logo.png" alt="Logo" />
+                <span class="logo-medium-text">CynicalToaster.com</span>
+            </div>
+        </div>
+        <div class="row">
+            <a href="/home" class="header-nav-link">Home</a>
+            <a href="/bookmarks" class="header-nav-link">Bookmarks</a>
+        </div>
+        <div class="row">
+            <a href="/projects" class="header-nav-link">Projects</a>
+            <a href="/about" class="header-nav-link">About</a>
+        </div>
+        <div class="row">
+            <a href="/contact" class="header-nav-link">Contact</a>
+        </div>
+    </div>
+    
+</div>

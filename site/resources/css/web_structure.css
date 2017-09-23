@@ -5,7 +5,7 @@
     min-width: 360px;
     flex-flow: column;
 
-    background-color: #f0f0f0;
+    background-color: #ededed;
 }
 
 .row {
@@ -125,7 +125,7 @@
 
 .col-a3-1, .col-a3-2, .col-a3-3, .col-a3-4, .col-a3-5, .col-a3-6, 
 .col-a3-7, .col-a3-8, .col-a3-9, .col-a3-10, .col-a3-11, .col-a3-12 {
-    display:flex;
+    /* display:flex; */
     flex: 0 1 auto;
     flex-wrap: wrap;
     padding-left: 0px;
@@ -328,6 +328,7 @@
 .pr-20 {padding-right: 20px;}
 
 .panel {
+    box-sizing: border-box;
     width: 100%;
     padding: 10px 10px 0px 10px;
     /* margin: 5px; */
@@ -338,9 +339,36 @@
     overflow: hidden;
 }
 
+.panel-header {
+    display: inline-block;
+    box-sizing: border-box;
+    width: calc(100% + 20px);
+    padding: 10px 10px 0px 10px;
+    margin: -10px -10px 10px -10px;
+
+    border-bottom: 1px solid #ddd;
+    background-color: #f4f4f4;
+}
+
+.panel-footer {
+    display: inline-block;
+    box-sizing: border-box;
+    width: calc(100% + 20px);
+    padding: 10px 10px 0px 10px;
+    margin: 10px -10px 0px -10px;
+
+    border-top: 1px solid #ddd;
+    background-color: #f4f4f4;
+}
+
 .left {display: flex;}
 .right {margin-left: auto; display: flex;}
 
 .hidden {
     display: none !important;
+}
+
+p {margin: 0px 0px 10px 0px}
+h1, h2, h3, h4, h5, h6 {
+    margin: 10px 0px 20px 0px
 }

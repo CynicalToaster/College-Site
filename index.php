@@ -1,0 +1,1 @@
+<? require_once('site/boot.php') ?>

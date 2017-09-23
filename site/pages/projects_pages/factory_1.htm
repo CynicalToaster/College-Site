@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Ajax Project - College Site</title>
+
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
+        <link rel="stylesheet" type="text/css" href="/site/resources/css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/site/resources/css/web_structure.css"/>
+        <link rel="stylesheet" type="text/css" href="/site/pages/page_themes/home.css"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <? renderPartial('pages/page_headers/home') ?>
+            <div id="content">
+                <div class="row pl-10 pr-10">
+                    <div class="offset-a4-1 col-a4-10">
+                        <div class="offset-a2-2 col-a2-8">
+
+                            <div class="row">
+                                <div id="breadcrumbs">
+                                    <ul>
+                                        <li class="breadcrumbs-crumb">
+                                            <a href="/home">Home</a>
+                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                        </li>
+                                        <li class="breadcrumbs-crumb">
+                                            <a href="/projects">Projects</a>
+                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                        </li>
+                                        <li class="breadcrumbs-active">Factory V1</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-a3-12">
+                                <div class="panel">
+                                    <div class="panel-header">
+                                        <h1 class="pl-20">Factory V1</h1>
+                                    </div>
+                                    <p><i class="fa fa-cog fa-spin" style="font-size: 18px;" aria-hidden="true"></i> Under Construction</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <? renderPartial('pages/page_footers/home') ?>
+        </div>
+    </body>
+</html>
