@@ -44,8 +44,9 @@
 
                                     <style>
                                         #snake-canvas {
-                                            width: 400px; 
-                                            height: 400px; 
+                                            /* width: 50%;  */
+                                            /* height: 400px;  */
+                                            max-width: 100%;
                                             border: 1px solid #ddd; 
                                             box-shadow: 0px 0px 4px -2px #000;
                                         }
@@ -84,13 +85,11 @@
                                                 var last_update = 0;
                                                 var last_draw = 0;
 
-                                                console.log(snake_draw);
-
                                                 generate_food(0);
 
                                                 $('#snake-score').html(score);
                                                 $('#snake-highscore').html(highscore);
-                                                $('#snake-speed').html(Math.round(speed));
+                                                //$('#snake-speed').html(Math.round(speed));
 
                                                 window.addEventListener("keydown",
                                                     function(e){
@@ -127,7 +126,7 @@
 
                                                     $('#snake-score').html(score);
                                                     $('#snake-highscore').html(highscore);
-                                                    $('#snake-speed').html(Math.round(speed));
+                                                    //$('#snake-speed').html(Math.round(speed));
                                                 }
 
                                                 function generate_food(index)
@@ -159,6 +158,7 @@
                                                     {
                                                         if (interval < 0)
                                                         {
+                                                            $('#snake-speed').html(interval);
                                                             interval += (1 / speed);
                                                             last_update = cur_time;
 
@@ -186,7 +186,7 @@
                                                                             score += 1;
                                                                             $('#snake-score').html(score);
                                                                             speed += 0.1;
-                                                                            $('#snake-speed').html(Math.round(speed));
+                                                                            //$('#snake-speed').html(Math.round(speed));
 
                                                                             if (score > highscore)
                                                                             {
@@ -237,36 +237,35 @@
                                                             ctx.fillStyle="#444";
                                                             ctx.fillText(Math.round(1 / dt) + ' fps',10,20);
 
-                                                            ctx.beginPath();
                                                             ctx.fillStyle="#44AA44";
+                                                            ctx.beginPath();
                                                             food.forEach(function(food_cell) {
-                                                                ctx.rect(food_cell.x * scale.x, food_cell.y * scale.y,scale.x - 1,scale.y - 1);
+                                                                ctx.arc( food_cell.x * scale.x + (scale.x * 0.5), food_cell.y * scale.y + (scale.y * 0.6), scale.x * 0.4, 0, 2*Math.PI);
                                                                 ctx.fill();
                                                             }, this);
                                                             ctx.closePath();
                                                             
-                                                            
                                                             ctx.fillStyle="#444";
+                                                            ctx.strokeStyle="#aaa";
                                                             for (var i = 0; i < snake.length; i++) {
                                                                 if (snake_draw[i] == null)
                                                                     snake_draw[i] = {x:0,y:0};
                                                                 
                                                                 var delta_t = (1 / speed);
                                                                 var progress = ((last_draw - last_update) / delta_t) * 0.001;
-                                                                //console.log(progress);
 
                                                                 cell = snake[i];
                                                                 cell_draw = snake_draw[i];
 
                                                                 ctx.beginPath();
-                                                                ctx.arc( (cell_draw.x + ( (cell.x - cell_draw.x) * progress )) * scale.x + (scale.x * 0.5), (cell_draw.y + ( (cell.y - cell_draw.y) * progress )) * scale.y + (scale.y * 0.5), scale.x * 0.5, 0, 2*Math.PI);//scale.x - 1,scale.y - 1);
+                                                                ctx.arc( (cell_draw.x + ( (cell.x - cell_draw.x) * progress )) * scale.x + (scale.x * 0.5), (cell_draw.y + ( (cell.y - cell_draw.y) * progress )) * scale.y + (scale.y * 0.5), scale.x * 0.5, 0, 2*Math.PI);
                                                                 ctx.fill();
+                                                                ctx.stroke();
                                                                 ctx.closePath();
                                                             }
-                                                            
 
+                                                            // ctx.fillStyle="#f00";                                      
                                                             // ctx.beginPath();
-                                                            // ctx.fillStyle="#f00";
                                                             // snake.forEach(function(cell) {
                                                             //     ctx.rect(cell.x * scale.x + 2, cell.y * scale.y + 2, scale.x - 5,scale.y - 5);
                                                             //     ctx.fill();
