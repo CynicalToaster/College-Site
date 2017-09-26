@@ -78,7 +78,7 @@
 
                                                 var score = 0;
                                                 var highscore = 0;
-                                                var speed = 6;
+                                                var speed = 6000;
                                                 var gameover = false;
                                                 var pause = false;
 
@@ -119,7 +119,7 @@
                                                     food = [{x:10,y:20}];
                                                     snake_direction = {x:0,y:0};
                                                     score = 0;
-                                                    speed = 15;
+                                                    speed = 6;
                                                     gameover = false;
 
                                                     generate_food(0);
@@ -131,7 +131,23 @@
 
                                                 function generate_food(index)
                                                 {
-                                                    food[index] = {x: Math.floor(Math.random() * board_size.x), y: Math.floor(Math.random() * board_size.y)};
+                                                    var position = {x:0,y:0};
+                                                    var valid_position = false;
+                                                    var max_tries = 500;
+
+                                                    console.log('generate_food');
+
+                                                    while (!valid_position && max_tries > 0)
+                                                    {
+                                                        position = {x: Math.floor(Math.random() * board_size.x), y: Math.floor(Math.random() * board_size.y)};
+
+                                                        if (!inArray(position, snake))
+                                                            valid_position = true;
+
+                                                        max_tries--;
+                                                    }
+
+                                                    food[index] = position;
                                                 }
                                                 
                                                 function input()
@@ -146,6 +162,10 @@
                                                             snake_direction = {x:0,y:-1};
                                                         if(keys[83] && snake_direction.y != -1) 
                                                             snake_direction = {x:0,y:1};
+
+                                                        var new_snake_direction = getPathToFood(1);
+                                                        //if (!(new_snake_direction.x == 0 && new_snake_direction.y == 0))
+                                                            snake_direction = {x:new_snake_direction.x,y:new_snake_direction.y};
                                                     }
                                                     else if(keys[27]) 
                                                         restart();
@@ -179,7 +199,8 @@
                                                                         
                                                                         if (food_cell.x == cell.x && food_cell.y == cell.y)
                                                                         {
-                                                                            food[f] = {x: Math.floor(Math.random() * board_size.x), y: Math.floor(Math.random() * board_size.y)};
+                                                                            //food[f] = {x: Math.floor(Math.random() * board_size.x), y: Math.floor(Math.random() * board_size.y)};
+                                                                            generate_food(0);
                                                                             snake.push({x:snake[0].x,y:snake[0].y});
                                                                             //snake_draw = snake.slice();
 
@@ -263,6 +284,11 @@
                                                                 ctx.stroke();
                                                                 ctx.closePath();
                                                             }
+
+                                                            ctx.textAlign="start"; 
+                                                            ctx.font = '12px Arial';
+                                                            ctx.fillStyle="#444";
+                                                            ctx.fillText(snake_direction.x + ',' + snake_direction.y,10,60);
 
                                                             // var cells = getAdjacentCells(snake[0], false)
 
@@ -393,30 +419,23 @@
                                                         while (maxSearch > 0 && !foundOrigin)
                                                         {
                                                             var adj_cells = getAdjacentCells(path[path.length - 1], true);
-                                                            //console.log(adj_cells);
                                                             var lowestCost = {x:0,y:0,cost: 99999};
                                                             adj_cells.forEach(function(cell) {
                                                                 cell = inArray(cell, scanned);
                                                                 if (cell.cost < lowestCost.cost)
-                                                                {
-                                                                    console.log('test');
                                                                     lowestCost = cell;
-                                                                }
                                                             }, this);
 
                                                             path.push(lowestCost);
 
                                                             if (lowestCost.x == start.x && lowestCost.y == start.y)
-                                                            {
                                                                 foundOrigin = true;
-                                                            }
 
                                                             maxSearch--;
                                                         }
                                                     }
 
                                                     scanning.forEach(function(cell) {
-                                                        //console.log(cell);
                                                         ctx.fillStyle="#f00";                                      
                                                         ctx.beginPath();
                                                         ctx.rect(cell.x * scale.x + 2, cell.y * scale.y + 2, (scale.x - 5) * (1 / (cell.cost * 0.5)),scale.y - 5);
@@ -425,7 +444,6 @@
                                                     }, this);
 
                                                     scanned.forEach(function(cell) {
-                                                        //console.log(cell);
                                                         ctx.fillStyle="#0f0";                                      
                                                         ctx.beginPath();
                                                         ctx.rect(cell.x * scale.x + 4, cell.y * scale.y + 4, scale.x - 9,scale.y - 9);
@@ -434,13 +452,22 @@
                                                     }, this);
 
                                                     path.forEach(function(cell) {
-                                                        //console.log(cell);
                                                         ctx.fillStyle="#00f";                                      
                                                         ctx.beginPath();
                                                         ctx.rect(cell.x * scale.x + 4, cell.y * scale.y + 4, scale.x - 9,scale.y - 9);
                                                         ctx.fill();
                                                         ctx.closePath();
                                                     }, this);
+
+                                                    //ctx.textAlign="start"; 
+                                                    //ctx.font = '12px Arial';
+                                                    //ctx.fillStyle="#444";
+                                                    //ctx.fillText((path[path.length - 2].x - path[path.length - 1].x) + ',' + (path[path.length - 2].y - path[path.length - 1].y),10,40);
+
+                                                    if (path.length > 1)
+                                                        return {x:(path[path.length - 2].x - path[path.length - 1].x),y:(path[path.length - 2].y - path[path.length - 1].y)};
+                                                    else
+                                                        return {x:0,y:0};
                                                 }
 
                                                 var last_time = 0;
