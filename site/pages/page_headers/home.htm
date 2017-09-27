@@ -116,14 +116,24 @@
             left: 0px;
             height: 100%;
             overflow: hidden;
+            z-index: 9999;
         }
 
         .header-nav-link-group {
-            
+            width: 100%;
         }
 
         .header-nav-mobile .header-nav-link {
+            display: block;
+            box-sizing: border-box;
             width: 100%;
+            padding: 10px;
+        }
+
+        .header-nav-mobile .seperator {
+            padding-top: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #ddd;
         }
     </style>                 
     
@@ -164,6 +174,7 @@
                             <a href="/home" class="header-nav-link">Home</a>
                             <a href="/bookmarks" class="header-nav-link">Bookmarks</a>
                             <a href="/projects" class="header-nav-link">Projects</a>
+                            <div class="seperator"></div>
                             <a href="/about" class="header-nav-link">About</a>
                             <a href="/contact" class="header-nav-link">Contact</a>
                         </div>

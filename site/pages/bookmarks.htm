@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Bookmarks - College Site</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
+        <link rel="stylesheet" type="text/css" href="/site/resources/css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/site/resources/css/web_structure.css"/>
+        <link rel="stylesheet" type="text/css" href="/site/pages/page_themes/home.css"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <? renderPartial('pages/page_headers/home') ?>
+            <div id="content">
+                <div class="row pl-10 pr-10">
+                    <div class="offset-a4-1 col-a4-10">
+                        <div class="offset-a2-2 col-a2-8">
+
+                            <div class="row">
+                                <div id="breadcrumbs">
+                                    <ul>
+                                        <li class="breadcrumbs-crumb">
+                                            <a href="/home">Home</a>
+                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                        </li>
+                                        <li class="breadcrumbs-active">Bookmarks</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-a3-12">
+                                <div class="row">
+
+                                    <style>
+                                        .bookmark-container {
+                                            display: flex;
+                                            flex-direction: row;
+                                            flex-wrap: wrap;
+                                            justify-content: center;
+                                            width: 100%;
+                                        }
+
+                                        .bookmark-tile {
+                                            /* position: relative; */
+                                            width: 200px;
+                                            height: 200px;
+                                            margin-right: 20px;
+                                            margin-bottom: 20px;
+                                        }
+
+                                        .bookmark-tile .bookmark-header {
+                                            display:flex;
+                                            align-items:center;
+                                            padding-bottom: 10px;
+                                        }
+
+                                        .bookmark-tile .bookmark-footer {
+                                            display:flex;
+                                            justify-content: center;
+                                            align-items:center;
+                                            padding-bottom: 10px;
+                                        }
+
+                                        .bookmark-tile .bookmark-icon {
+                                            display: flex;
+                                            position: relative;
+                                            top: 0px;
+                                            left: 0px;
+
+                                            width: 24px;
+                                            height: 24px;
+                                        }
+
+                                        .bookmark-tile .bookmark-name {
+                                            padding-left: 10px;
+                                            font-size: 16px;
+
+                                        }
+
+                                        .bookmark-icon img {
+                                            width: 100%;
+                                            height: 100%;
+                                        }
+
+                                        .panel-content {
+                                            margin: -10px -10px;
+                                            padding: 10px;
+                                            box-sizing: border-box;
+                                        }
+                                    </style>
+
+                                    <div class="bookmark-container">
+                                        <div class="bookmark-tile panel">
+                                            <div class="panel-header bookmark-header">
+                                                <div class="bookmark-icon">
+                                                    <img src="https://image.flaticon.com/icons/svg/25/25231.svg" alt="<>" />
+                                                </div>
+                                                <div class="bookmark-name">
+                                                    GitHub
+                                                </div>
+                                            </div>
+                                            <div class="panel-content">
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://github.com/CynicalToaster/College-Site">College-Site</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://github.com/CynicalToaster/CynicalToaster.com">CynicalToaster.com</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://github.com/CynicalToaster/Expression2">Expression2</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://github.com/CynicalToaster/CynicalToaster.com">CynicalToaster.com</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://github.com/CynicalToaster/Dashboard_Site">Dashboard_Site</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://github.com/CynicalToaster/MoSsDarkRp">MoSsDarkRp</a><br />
+                                            </div>
+                                            <div class="panel-footer bookmark-footer">
+                                                <a href="https://github.com" target="_blank">github.com</a>
+                                            </div>
+                                        </div>
+                                        <div class="bookmark-tile panel">
+                                            <div class="panel-header bookmark-header">
+                                                <div class="bookmark-icon">
+                                                    <img src="http://kuruczcsaba.hu/img/icon-w3.jpg" alt="<>" />
+                                                </div>
+                                                <div class="bookmark-name">
+                                                    W3 Schools
+                                                </div>
+                                            </div>
+                                            <div class="panel-content">
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://www.w3schools.com/icons/">Font Awesome</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://www.w3schools.com/jquery/jquery_get_started.asp">jQuery</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://www.w3schools.com/html/default.asp">HTML</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://www.w3schools.com/css/default.asp">CSS</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://www.w3schools.com/js/default.asp">JavaScript</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://www.w3schools.com/php/default.asp">Php</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://www.w3schools.com/sql/default.asp">SQL</a><br />
+                                            </div>
+                                            <div class="panel-footer bookmark-footer">
+                                                <a href="https://www.w3schools.com/" target="_blank">www.w3schools.com</a>
+                                            </div>
+                                        </div>
+                                        <div class="bookmark-tile panel">
+                                            <div class="panel-header bookmark-header">
+                                                <div class="bookmark-icon">
+                                                    <img src="https://www.mapkcode.com/images/marks/jquery.gif" alt="<>" />
+                                                </div>
+                                                <div class="bookmark-name">
+                                                    jQuery
+                                                </div>
+                                            </div>
+                                            <div class="panel-content">
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://jquery.com">jQuery</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="http://api.jquery.com">jQuery API Doc</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://jqueryui.com">jQuery UI</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="http://api.jqueryui.com">jQuery UI API Doc</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://jqueryui.com/sortable/">jQuery Sortable</a><br />
+                                            </div>
+                                            <div class="panel-footer bookmark-footer">
+                                                <a href="https://jquery.com" target="_blank">jquery.com</a>
+                                            </div>
+                                        </div>
+                                        <div class="bookmark-tile panel">
+                                            <div class="panel-header bookmark-header">
+                                                <div class="bookmark-icon">
+                                                    <img src="https://cdn.worldvectorlogo.com/logos/steam-icon.svg" alt="<>" />
+                                                </div>
+                                                <div class="bookmark-name">
+                                                    Steam
+                                                </div>
+                                            </div>
+                                            <div class="panel-content">
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="http://store.steampowered.com">Store</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="http://steamcommunity.com">Community</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="http://steamcommunity.com/id/cynicaltoaster/friends/">Friends</a><br />
+                                            </div>
+                                            <div class="panel-footer bookmark-footer">
+                                                <a href="http://store.steampowered.com" target="_blank">store.steampowered.com</a>
+                                            </div>
+                                        </div>
+                                        <div class="bookmark-tile panel">
+                                            <div class="panel-header bookmark-header">
+                                                <div class="bookmark-icon">
+                                                    <img src="https://maxcdn.icons8.com/Share/icon/Logos//amazon1600.png" alt="<>" />
+                                                </div>
+                                                <div class="bookmark-name">
+                                                    Amazon
+                                                </div>
+                                            </div>
+                                            <div class="panel-content">
+                                                
+                                            </div>
+                                            <div class="panel-footer bookmark-footer">
+                                                <a href="https://www.amazon.co.uk" target="_blank">www.amazon.co.uk</a>
+                                            </div>
+                                        </div>
+                                        <div class="bookmark-tile panel">
+                                            <div class="panel-header bookmark-header">
+                                                <div class="bookmark-icon">
+                                                    <img src="https://cdn.worldvectorlogo.com/logos/youtube-icon.svg" alt="<>" />
+                                                </div>
+                                                <div class="bookmark-name">
+                                                    Youtube
+                                                </div>
+                                            </div>
+                                            <div class="panel-content">
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://www.youtube.com">Test</a><br />
+                                                <i class="fa fa-angle-double-right" aria-hidden="true"></i> <a href="https://www.youtube.com">Test</a><br />
+                                            </div>
+                                            <div class="panel-footer bookmark-footer">
+                                                <a href="https://www.youtube.com" target="_blank">www.youtube.com</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <? renderPartial('pages/page_footers/home') ?>
+        </div>
+    </body>
+</html>
