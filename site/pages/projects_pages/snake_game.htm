@@ -70,7 +70,7 @@
 
                                                 var board_size = {x:20,y:20};
                                                 var snake = [{x:Math.round(board_size.x * 0.5),y:Math.round(board_size.y * 0.5)},{x:0,y:0},{x:0,y:0},{x:0,y:0}];
-                                                var snake_draw = [];//[].concat(snake);
+                                                var snake_draw = [];
                                                 var food = [{x:10,y:20}];
                                                 var snake_direction = {x:0,y:0};
                                                 var scale = {x:canvas.width / board_size.x,y:canvas.height / board_size.y};
@@ -78,12 +78,15 @@
 
                                                 var score = 0;
                                                 var highscore = 0;
-                                                var speed = 6000;
+                                                var speed = 6;
                                                 var gameover = false;
                                                 var pause = false;
 
                                                 var last_update = 0;
                                                 var last_draw = 0;
+
+                                                var auto_mode = false;
+                                                var auto_debug_draw = false;
 
                                                 generate_food(0);
 
@@ -93,13 +96,13 @@
 
                                                 window.addEventListener("keydown",
                                                     function(e){
-                                                        keys[e.keyCode] = true;
+                                                        keys[e.key] = true;
                                                     },
                                                 false);
 
                                                 window.addEventListener("keyup",
                                                     function(e){
-                                                        keys[e.keyCode] = false;
+                                                        keys[e.key] = false;
                                                     },
                                                 false);
 
@@ -121,6 +124,7 @@
                                                     score = 0;
                                                     speed = 6;
                                                     gameover = false;
+                                                    auto_mode = false;
 
                                                     generate_food(0);
 
@@ -134,8 +138,6 @@
                                                     var position = {x:0,y:0};
                                                     var valid_position = false;
                                                     var max_tries = 500;
-
-                                                    console.log('generate_food');
 
                                                     while (!valid_position && max_tries > 0)
                                                     {
@@ -154,20 +156,29 @@
                                                 {
                                                     if (!gameover)
                                                     {
-                                                        if(keys[65] && snake_direction.x != 1) 
+                                                        if(keys['a'] && snake_direction.x != 1) 
                                                             snake_direction = {x:-1,y:0};
-                                                        if(keys[68] && snake_direction.x != -1) 
+                                                        if(keys['d'] && snake_direction.x != -1) 
                                                             snake_direction = {x:1,y:0};
-                                                        if(keys[87] && snake_direction.y != 1) 
+                                                        if(keys['w'] && snake_direction.y != 1) 
                                                             snake_direction = {x:0,y:-1};
-                                                        if(keys[83] && snake_direction.y != -1) 
+                                                        if(keys['s'] && snake_direction.y != -1) 
                                                             snake_direction = {x:0,y:1};
 
-                                                        var new_snake_direction = getPathToFood(1);
-                                                        //if (!(new_snake_direction.x == 0 && new_snake_direction.y == 0))
-                                                            snake_direction = {x:new_snake_direction.x,y:new_snake_direction.y};
+                                                        if(keys['Control'] && keys['q'])
+                                                            auto_mode = true;
+
+                                                        if(keys['Control'] && keys['e'])
+                                                            auto_mode = false;
+
+                                                        if (auto_mode)
+                                                        {
+                                                            var new_dir = getPathToFood(false);
+                                                            if (!(new_dir.x == 0 && new_dir.y == 0))
+                                                                snake_direction = {x:new_dir.x,y:new_dir.y};
+                                                        }
                                                     }
-                                                    else if(keys[27]) 
+                                                    else if(keys['Escape']) 
                                                         restart();
                                                 }
 
@@ -201,7 +212,7 @@
                                                                         {
                                                                             //food[f] = {x: Math.floor(Math.random() * board_size.x), y: Math.floor(Math.random() * board_size.y)};
                                                                             generate_food(0);
-                                                                            snake.push({x:snake[0].x,y:snake[0].y});
+                                                                            snake.push({x:snake[snake.length - 1].x,y:snake[snake.length - 1].y});
                                                                             //snake_draw = snake.slice();
 
                                                                             score += 1;
@@ -230,11 +241,13 @@
                                                                     else if (cell.y < 0)
                                                                         cell.y = board_size.y;
 
-                                                                    snake.forEach(function(snake_cell) {
-                                                                        if (!(snake_direction.x == 0 && snake_direction.y == 0))
-                                                                            if (snake_cell != cell && snake_cell.x == cell.x && snake_cell.y == cell.y)
+                                                                    if (!(snake_direction.x == 0 && snake_direction.y == 0))
+                                                                    {
+                                                                        snake.forEach(function(tail_cell) {
+                                                                            if (tail_cell != cell && cell.x == tail_cell.x && cell.y == tail_cell.y)
                                                                                 gameover = true;
-                                                                    }, this);
+                                                                        }, this);
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -274,6 +287,9 @@
                                                                 
                                                                 var delta_t = (1 / speed);
                                                                 var progress = ((last_draw - last_update) / delta_t) * 0.001;
+
+                                                                if (Math.abs(snake[i].x - snake_draw[i].x) > 2 || Math.abs(snake[i].y - snake_draw[i].y) > 2)
+                                                                    snake_draw[i] = {x:snake[i].x,y:snake[i].y};
 
                                                                 cell = snake[i];
                                                                 cell_draw = snake_draw[i];
@@ -326,6 +342,8 @@
                                                         ctx.fillText('Game Over!',200,200);
                                                         ctx.font = '14px Arial';
                                                         ctx.fillText('(Press ESC to start a new game)',200,220);
+                                                        ctx.font = '9px Arial';
+                                                        ctx.fillText('(Press Ctrl+Q to enabled easy mode)',200,240);
                                                     }
                                                 }
 
@@ -366,7 +384,7 @@
                                                     return false;
                                                 }
 
-                                                function getPathToFood()
+                                                function getPathToFood(shouldWrap)
                                                 {
                                                     var navmesh = [];
                                                     var scanning = [];
@@ -401,7 +419,7 @@
                                                                 foundTarget = true;
                                                             else
                                                             {
-                                                                var adjacentCells = getAdjacentCells(cell, true);
+                                                                var adjacentCells = getAdjacentCells(cell, shouldWrap);
                                                                 adjacentCells.forEach(function(adj_cell) {
                                                                     if (!inArray(adj_cell, scanned) && !inArray(adj_cell, scanning) && !inArray(adj_cell, snake))
                                                                         scanning.push({x:adj_cell.x, y:adj_cell.y, cost:cell.cost + 1});
@@ -418,7 +436,7 @@
                                                         path.push(end);
                                                         while (maxSearch > 0 && !foundOrigin)
                                                         {
-                                                            var adj_cells = getAdjacentCells(path[path.length - 1], true);
+                                                            var adj_cells = getAdjacentCells(path[path.length - 1], shouldWrap);
                                                             var lowestCost = {x:0,y:0,cost: 99999};
                                                             adj_cells.forEach(function(cell) {
                                                                 cell = inArray(cell, scanned);
@@ -435,34 +453,37 @@
                                                         }
                                                     }
 
-                                                    scanning.forEach(function(cell) {
-                                                        ctx.fillStyle="#f00";                                      
-                                                        ctx.beginPath();
-                                                        ctx.rect(cell.x * scale.x + 2, cell.y * scale.y + 2, (scale.x - 5) * (1 / (cell.cost * 0.5)),scale.y - 5);
-                                                        ctx.fill();
-                                                        ctx.closePath();
-                                                    }, this);
+                                                    if (auto_debug_draw)
+                                                    {
+                                                        scanning.forEach(function(cell) {
+                                                            ctx.fillStyle="#f00";                                      
+                                                            ctx.beginPath();
+                                                            ctx.rect(cell.x * scale.x + 2, cell.y * scale.y + 2, (scale.x - 5) * (1 / (cell.cost * 0.5)),scale.y - 5);
+                                                            ctx.fill();
+                                                            ctx.closePath();
+                                                        }, this);
 
-                                                    scanned.forEach(function(cell) {
-                                                        ctx.fillStyle="#0f0";                                      
-                                                        ctx.beginPath();
-                                                        ctx.rect(cell.x * scale.x + 4, cell.y * scale.y + 4, scale.x - 9,scale.y - 9);
-                                                        ctx.fill();
-                                                        ctx.closePath();
-                                                    }, this);
+                                                        scanned.forEach(function(cell) {
+                                                            ctx.fillStyle="#0f0";                                      
+                                                            ctx.beginPath();
+                                                            ctx.rect(cell.x * scale.x + 4, cell.y * scale.y + 4, scale.x - 9,scale.y - 9);
+                                                            ctx.fill();
+                                                            ctx.closePath();
+                                                        }, this);
 
-                                                    path.forEach(function(cell) {
-                                                        ctx.fillStyle="#00f";                                      
-                                                        ctx.beginPath();
-                                                        ctx.rect(cell.x * scale.x + 4, cell.y * scale.y + 4, scale.x - 9,scale.y - 9);
-                                                        ctx.fill();
-                                                        ctx.closePath();
-                                                    }, this);
+                                                        path.forEach(function(cell) {
+                                                            ctx.fillStyle="#00f";                                      
+                                                            ctx.beginPath();
+                                                            ctx.rect(cell.x * scale.x + 4, cell.y * scale.y + 4, scale.x - 9,scale.y - 9);
+                                                            ctx.fill();
+                                                            ctx.closePath();
+                                                        }, this);
 
-                                                    //ctx.textAlign="start"; 
-                                                    //ctx.font = '12px Arial';
-                                                    //ctx.fillStyle="#444";
-                                                    //ctx.fillText((path[path.length - 2].x - path[path.length - 1].x) + ',' + (path[path.length - 2].y - path[path.length - 1].y),10,40);
+                                                        //ctx.textAlign="start"; 
+                                                        //ctx.font = '12px Arial';
+                                                        //ctx.fillStyle="#444";
+                                                        //ctx.fillText((path[path.length - 2].x - path[path.length - 1].x) + ',' + (path[path.length - 2].y - path[path.length - 1].y),10,40);
+                                                    }
 
                                                     if (path.length > 1)
                                                         return {x:(path[path.length - 2].x - path[path.length - 1].x),y:(path[path.length - 2].y - path[path.length - 1].y)};
