@@ -2,7 +2,14 @@
     <div class="row pl-10 pr-10">
         <div class="offset-a4-1 col-a4-10">
             <div class="offset-a2-2 col-a2-8">
-                FOOTER!
+                <span class="left">
+                    Git Version: <?= exec('git log --pretty="%h" -n1 HEAD') ?>
+                    &nbsp;-&nbsp;
+                    Last Update: <?= exec('git log --pretty="%ci" -n1 HEAD') ?>
+                </span>
+                <span class="right">
+                    Dan Evans
+                </span>
             </div>
         </div>
     </div>
