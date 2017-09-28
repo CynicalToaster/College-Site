@@ -171,6 +171,12 @@
                                                         if(keys['Control'] && keys['e'])
                                                             auto_mode = false;
 
+                                                        if(keys['1'])
+                                                            auto_debug_draw = true;
+
+                                                        if(keys['2'])
+                                                            auto_debug_draw = false;
+
                                                         if (auto_mode)
                                                         {
                                                             var new_dir = getPathToFood(false);
