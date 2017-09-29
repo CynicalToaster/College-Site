@@ -50,10 +50,6 @@
                                             border: 1px solid #ddd; 
                                             box-shadow: 0px 0px 4px -2px #000;
                                         }
-
-                                        #snake-canvas:active {
-                                            border: 1px solid #000; 
-                                        }
                                     </style>
                                     
                                     <div class="row">
@@ -78,7 +74,7 @@
 
                                                 var score = 0;
                                                 var highscore = 0;
-                                                var speed = 6;
+                                                var speed = 9999;
                                                 var gameover = false;
                                                 var pause = false;
 
@@ -195,7 +191,7 @@
                                                     {
                                                         if (interval < 0)
                                                         {
-                                                            $('#snake-speed').html(interval);
+                                                            $('#snake-speed').html(speed);
                                                             interval += (1 / speed);
                                                             last_update = cur_time;
 
