@@ -176,7 +176,7 @@
                                                         if (auto_mode)
                                                         {
                                                             var new_dir = getPathToFood(false);
-                                                            if (!(new_dir.x == 0 && new_dir.y == 0))
+                                                            //if (!(new_dir.x == 0 && new_dir.y == 0))
                                                                 snake_direction = {x:new_dir.x,y:new_dir.y};
                                                         }
                                                     }
@@ -384,6 +384,9 @@
                                                             return cell;
                                                     }
                                                     return false;
+                                                }
+
+                                                    
                                                 }
 
                                                 function getPathToFood(shouldWrap)
