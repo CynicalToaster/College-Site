@@ -1,4 +1,4 @@
-<?php
+<?
 	/**
 	 * GIT DEPLOYMENT SCRIPT
 	 *
