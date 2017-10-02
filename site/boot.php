@@ -25,6 +25,7 @@
         '/projects/game_2' => 'projects_pages/game_2.htm',
         '/projects/description_generator' => 'projects_pages/description_generator.htm',
         '/projects/snake' => 'projects_pages/snake_game.htm',
+        '/projects/dml_page' => 'projects_pages/dml_page.htm',
         
         '/about' => 'about.htm',
         '/contact' => 'contact.htm',

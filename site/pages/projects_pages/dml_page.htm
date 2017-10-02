@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DML Project - College Site</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans">
+        <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Pacifico">
+        <link rel="stylesheet" type="text/css" href="/site/resources/css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/site/resources/css/web_structure.css"/>
+        <link rel="stylesheet" type="text/css" href="/site/pages/page_themes/home.css"/>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="/site/resources/javascript/ajax.js"></script>
+
+        <style>
+            #dynamic-content {
+                position: relative;
+                padding: 10px;
+                margin: 20px;
+                border: 1px solid #ddd;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="page" class="container">
+            <? renderPartial('pages/page_headers/home') ?>
+            <div id="content">
+                <div class="row">
+                    <div class="offset-a4-1 col-a4-10">
+                        <div class="offset-a2-2 col-a2-8">
+
+                            <div class="row">
+                                <div id="breadcrumbs">
+                                    <ul>
+                                        <li class="breadcrumbs-crumb">
+                                            <a href="/home">Home</a>
+                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                        </li>
+                                        <li class="breadcrumbs-crumb">
+                                            <a href="/projects">Projects</a>
+                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                        </li>
+                                        <li class="breadcrumbs-active">DML Page</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-a3-12">
+                                <div class="panel">
+                                    <div class="panel-header">
+                                        <h2 class="pl-20">Dynamic Machine Learning Page</h2>
+                                    </div>
+                                    <div class="panel-content pb-10">
+                                        <div id="dynamic-content">
+                                            <?
+                                                $options = array(
+                                                    'button' => array(
+                                                        'colours' => array(
+                                                            '#ff0000',
+                                                            '#00ff00',
+                                                            '#0000ff',
+                                                            '#777700',
+                                                            '#007777',
+                                                            '#770077'
+                                                        )
+                                                    )
+                                                );
+                                            ?>
+
+                                            <input class="btn btn-wide" type="button" onClick="
+                                                console.log('Submit Ajax');
+                                                send_ajax($('#user_form')[0], 'ev:test', {
+                                                    onSuccess: function() {
+                                                        console.log('Success');
+                                                    },
+                                                    update: $('#result')
+                                                });
+                                            " value="A Button" />
+                                            <div id="result"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <? renderPartial('pages/page_footers/home') ?>
+        </div>
+    </body>
+</html>
