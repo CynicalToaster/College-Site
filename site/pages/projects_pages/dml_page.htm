@@ -22,6 +22,16 @@
                 border: 1px solid #ddd;
             }
         </style>
+
+        <script>
+            function rgb2hex(orig){
+                var rgb = orig.replace(/\s/g,'').match(/^rgba?\((\d+),(\d+),(\d+)/i);
+                    return (rgb && rgb.length === 4) ? "#" +
+                        ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+                        ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+                        ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : orig;
+                }
+        </script>
     </head>
     <body>
         <div id="page" class="container">
@@ -64,20 +74,33 @@
                                                             '#777700',
                                                             '#007777',
                                                             '#770077'
+                                                        ),
+                                                        'text' => array(
+                                                            'Click me',
+                                                            'Don\'t click me'
                                                         )
                                                     )
                                                 );
                                             ?>
 
-                                            <input class="btn btn-wide" type="button" onClick="
+                                            <input id="test-btn" class="btn btn-wide" type="button" style="background-color: <?= $options['button']['colours'][rand(0, sizeof($options['button']['colours']) - 1)] ?>;" onClick="
                                                 console.log('Submit Ajax');
-                                                send_ajax($('#user_form')[0], 'ev:test', {
+                                                send_ajax($('#user_form')[0], 'test', {
                                                     onSuccess: function() {
                                                         console.log('Success');
                                                     },
                                                     update: $('#result')
                                                 });
                                             " value="A Button" />
+
+                                            <script>
+                                                var btn = $('#test-btn');
+                                                btn.ready(function(){
+                                                    if (rgb2hex(btn.css('background-color')) == '#0000ff')
+                                                        btn.click();
+                                                });
+                                            </script>
+
                                             <div id="result"></div>
                                         </div>
                                     </div>
