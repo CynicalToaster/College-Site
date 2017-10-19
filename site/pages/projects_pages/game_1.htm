@@ -32,7 +32,7 @@
                                             <a href="/projects">Projects</a>
                                             <i class="fa fa-angle-right" aria-hidden="true"></i>
                                         </li>
-                                        <li class="breadcrumbs-active">Game V1</li>
+                                        <li class="breadcrumbs-active">Loading Wheel 1</li>
                                     </ul>
                                 </div>
                             </div>
@@ -40,9 +40,59 @@
                             <div class="col-a3-12">
                                 <div class="panel">
                                     <div class="panel-header">
-                                        <h1 class="pl-20">Game V1</h1>
+                                        <h1 class="pl-20">Loading Wheel 1</h1>
                                     </div>
-                                    <p><i class="fa fa-cog fa-spin" style="font-size: 18px;" aria-hidden="true"></i> Under Construction</p>
+                                    <canvas id="canvas" class="mb-10" width="200" height="200" style="border:1px solid #000000; width: 200px; height: 200px;"></canvas>
+                                    <script>
+                                        var c = document.getElementById("canvas");
+                                        var ctx = c.getContext("2d");
+
+                                        function drawArcTrail(ctx, startAngle, endAngle, radius, width, pos)
+                                        {
+                                            ctx.beginPath();
+                                            ctx.arc(pos.x,pos.y,radius,startAngle,endAngle);
+                                            ctx.lineWidth = width;
+                                            ctx.stroke();
+                                            ctx.closePath();
+
+                                            ctx.beginPath();
+                                            ctx.arc(pos.x + Math.cos(startAngle) * radius,pos.y + Math.sin(startAngle) * radius,width * 0.5,0,2*Math.PI);
+                                            ctx.fill();
+                                            ctx.closePath();
+
+                                            ctx.beginPath();
+                                            ctx.arc(pos.x + Math.cos(endAngle) * radius,pos.y + Math.sin(endAngle) * radius,width * 0.5,0,2*Math.PI);
+                                            ctx.fill();
+                                            ctx.closePath();
+                                        }
+
+                                        var a = 0;
+                                        var b = 0;
+                                        var c = 0;
+
+                                        var last_time = 0;
+                                        function loop(cur_time)
+                                        {
+                                            var dt = (cur_time - last_time) * 0.001;
+                                            last_time = cur_time;
+
+                                            a += dt;
+                                            b += (Math.cos(a) + 2.2) * 0.05;
+                                            c = (Math.sin(a) + 1) * Math.PI;
+
+                                            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                            ctx.fillStyle="red";
+                                            ctx.strokeStyle="blue";
+
+                                            drawArcTrail(ctx, b, b + c, 50, 10, {x:100,y:100})
+
+                                            window.requestAnimationFrame(loop);
+                                        }
+                                        window.requestAnimationFrame(loop);
+
+
+                                    </script>
                                 </div>
                             </div>
 
