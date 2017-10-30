@@ -97,7 +97,7 @@
                                                     )
                                                 );
 
-                                                $command = '/home/dan/anaconda/envs/tensorflow/python.exe /GitHub/TensorFlow/tf_run.py [0]';
+                                                $command = '/home/dan/anaconda3/envs/TensorFlow/bin/python /GitHub/TensorFlow/tf_run.py [0]';
                                                 $output = shell_exec($command);
                                                 $output = explode(',', substr(trim($output), 1, -1));
 
