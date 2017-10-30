@@ -99,6 +99,8 @@
 
                                                 $command = '/home/dan/anaconda3/envs/TensorFlow/bin/python /GitHub/TensorFlow/tf_run.py [0]';
                                                 $output = shell_exec($command);
+                                                echo $output;
+                                                echo '<br>';
                                                 $output = explode(',', substr(trim($output), 1, -1));
 
                                                 $values = array();
