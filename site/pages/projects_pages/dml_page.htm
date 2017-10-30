@@ -65,6 +65,21 @@
                                     <div class="panel-content pb-10">
                                         <div id="dynamic-content">
                                             <?
+                                                function weighted_random_simple($values, $weights){ 
+                                                    $count = count($values); 
+                                                    $i = 0; 
+                                                    $n = 0; 
+                                                    $num = mt_rand(0, array_sum($weights)); 
+                                                    while($i < $count){
+                                                        $n += $weights[$i]; 
+                                                        if($n >= $num){
+                                                            break; 
+                                                        }
+                                                        $i++; 
+                                                    } 
+                                                    return $values[$i]; 
+                                                }
+
                                                 $options = array(
                                                     'button' => array(
                                                         'colours' => array(
@@ -81,23 +96,84 @@
                                                         )
                                                     )
                                                 );
+
+                                                $command = 'C:/Users/Dan/AppData/Local/conda/conda/envs/tensorflow/python.exe C:/GitHub/TensorFlow/tf_run.py [0]';
+                                                $output = shell_exec($command);
+                                                $output = explode(',', substr(trim($output), 1, -1));
+
+                                                $values = array();
+                                                $weights = array();
+
+                                                foreach($output as $key => $value)
+                                                {
+                                                    $values[] = $key;
+                                                    $weights[] = (float)substr(trim($value), 1, -1);
+                                                }
+
+                                                $json_output = json_encode($weights);
+
+                                                foreach($weights as $key => $weight)
+                                                    $weights[$key] *= 100;
+
+                                                print_r($weights);
+                                                echo '<br>';
+                                                $counts = array(0,0,0,0);
+                                                for ($i = 0; $i < 1000; $i++)
+                                                    $counts[weighted_random_simple($values, $weights)]++;
+
+                                                foreach($counts as $key => $count)
+                                                {
+                                                    if ($count > 0)
+                                                        echo $key . ' ' . ($count / 1000);
+                                                    else                                             
+                                                        echo $key . ' 0';
+                                                    echo '<br>';
+                                                }
+
+                                                $colour = weighted_random_simple($values, $weights);
+                                                echo 'Colour: ' . $colour;
+                                                $target_output = array();
+                                                foreach (json_decode($json_output) as $key => $value) {
+                                                    if ($key == $colour)
+                                                        $target_output[$key] = min($value * 1.2, 1);
+                                                    else
+                                                        $target_output[$key] = $value;
+                                                }
+
+                                                print_r($target_output);
+                                                echo '<br>';
                                             ?>
 
-                                            <input id="test-btn" class="btn btn-wide" type="button" style="background-color: <?= $options['button']['colours'][rand(0, sizeof($options['button']['colours']) - 1)] ?>;" onClick="
-                                                console.log('Submit Ajax');
-                                                send_ajax($('#user_form')[0], 'test', {
-                                                    onSuccess: function() {
-                                                        console.log('Success');
-                                                    },
-                                                    update: $('#result')
-                                                });
-                                            " value="A Button" />
+                                            <form id="test">
+                                                <input name="neural_result" type="hidden" value="<?= json_encode($target_output) ?>" />
+
+                                                <input id="test-btn" class="btn btn-wide" type="button" style="background-color: <?= $options['button']['colours'][$colour] ?>;" onClick="
+                                                    console.log('Submit Ajax');
+                                                    send_ajax($('#test')[0], 'test', {
+                                                        onSuccess: function() {
+                                                            console.log('Success');
+                                                        },
+                                                        update: $('#result')
+                                                    });
+                                                " value="A Button" />
+                                            </form>
+
+                                            <form id="test2">
+                                                <input name="reset" type="hidden" value="1" />
+
+                                                <input class="btn btn-wide" type="button" onClick="
+                                                    console.log('Submit Ajax');
+                                                    send_ajax($('#test2')[0], 'test', {});
+                                                " value="Reset" />
+                                            </form>
 
                                             <script>
                                                 var btn = $('#test-btn');
                                                 btn.ready(function(){
-                                                    if (rgb2hex(btn.css('background-color')) == '#0000ff')
-                                                        btn.click();
+                                                    if (rgb2hex(btn.css('background-color')) == '#777700')
+                                                        //btn.click();
+                                                    else
+                                                        //location.reload();
                                                 });
                                             </script>
 
