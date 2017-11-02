@@ -12,6 +12,15 @@
         <link rel="stylesheet" type="text/css" href="/site/pages/page_themes/home.css"/>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/css/swiper.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+
+
+
     </head>
     <body>
         <div id="page" class="container">
@@ -31,6 +40,68 @@
                                         <li class="breadcrumbs-active">Bookmarks</li>
                                     </ul>
                                 </div>
+                            </div>
+
+                            <div class="row">
+                                <style>
+                                    .swiper-container {
+                                        width: 600px;
+                                        height: 300px;
+                                    }      
+                                </style>
+
+                                <script>    
+                                    $(document).ready(function () {
+                                        var swiper = new Swiper ('.swiper-container', {
+                                            pagination: '.swiper-pagination',
+                                            nextButton: '.swiper-button-next',
+                                            prevButton: '.swiper-button-prev',
+                                            direction: 'horizontal',
+                                            loop: true,
+                                            slidesPerView: 1,
+                                            paginationClickable: true,
+                                            mousewheelControl: true
+                                        })        
+                                    });
+                                </script>
+                            
+                                <!-- Slider main container -->
+                                <div class="swiper-container">
+                                    <!-- Additional required wrapper -->
+                                    <div class="swiper-wrapper">
+                                        <!-- Slides -->
+                                        <div class="swiper-slide">
+                                            <img style="width: 100%;" src="https://wallpaperbrowse.com/media/images/Sunset-Village-Wallpaper.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img style="width: 100%;" src="https://wallpaperbrowse.com/media/images/MTM1MzQwMzMxNTE5NTA0MzU0_9uWvgKc.jpg" />
+                                        </div>
+                                        <div class="swiper-slide">
+                                            <img style="width: 100%;" src="https://wallpaperbrowse.com/media/images/High-Definition-Ultra-HD-Wallpaper.jpg" />
+                                        </div>
+                                    </div>
+                                    <!-- If we need pagination -->
+                                    <div class="swiper-pagination swiper-pagination-white swiper-pagination-bullets">
+                                        <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+                                        <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span>
+                                        <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span>
+                                    </div>
+<!-- 
+                                    <div class="swiper-pagination swiper-pagination-white swiper-pagination-clickable swiper-pagination-bullets" style="display: block;">
+                                    <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 1"></span>
+                                    <span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 2"></span>
+                                    <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span>
+                                    <span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 4"></span>
+                                    </div> -->
+                                    
+                                    <!-- If we need navigation buttons -->
+                                    <div class="swiper-button-prev"></div>
+                                    <div class="swiper-button-next"></div>
+                                    
+                                    <!-- If we need scrollbar -->
+                                    <div class="swiper-scrollbar"></div>
+                                </div>
+
                             </div>
 
                             <div class="col-a3-12">

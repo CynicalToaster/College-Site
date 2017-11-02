@@ -1,0 +1,37 @@
+<div id="page" class="container">
+    <? $this->renderPartial('site/pages/page_headers/home.htm') ?>
+    <div id="content">
+        <div class="row pl-10 pr-10">
+            <div class="offset-a4-1 col-a4-10">
+                <div class="offset-a2-2 col-a2-8">
+                    <div class="row">
+                        <div id="breadcrumbs">
+                            <ul>
+                                <li class="breadcrumbs-crumb">
+                                    <a href="/home">Home</a>
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                </li>
+                                <li class="breadcrumbs-active">404</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="offset-a3-3 col-a3-6">
+                        <div class="panel">
+                            <div class="panel-header">
+                                <h1 class="pl-20">Error: 404</h1>
+                            </div>
+                            <div class="error-image-container">
+                                <img class="error-image" src="/site/resources/images/turbine_broken.gif" alt="Broken Turbine Error" />
+                            </div>
+                            <div class="panel-footer">
+                                <h3 class="pl-20">Looks like something went wrong.</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <? $this->renderPartial('site/pages/page_footers/home.htm') ?>
+</div>

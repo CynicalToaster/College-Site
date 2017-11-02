@@ -2,14 +2,26 @@ function send_ajax(form, event, parameters)
 {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(e) {
-        if (this.readyState == 4 && this.status == 200) {
+        if (parameters['update'] && this.readyState == 4 && this.status == 200) {
             parameters['update'].html(this.responseText);
         }
     };
     
     xhttp.addEventListener("load", parameters['onSuccess']);
 
-    xhttp.open("POST", window.location.pathname, true);
+    var data = new FormData(form);
+    var extraData = parameters['extraData'];
+    if (extraData)
+    {
+        for (var key in extraData) {
+            if (extraData.hasOwnProperty(key)) {
+                var element = extraData[key];
+                data.append(key, element);
+            }
+        }
+    }
+
+    xhttp.open('POST', window.location.pathname, true);
     xhttp.setRequestHeader('event', event);
-    xhttp.send(new FormData(form));
+    xhttp.send(data);
 }
