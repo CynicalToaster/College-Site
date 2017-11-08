@@ -1,0 +1,361 @@
+<div id="page" class="container">
+    <? $this->renderPartial('site/pages/page_headers/home.htm') ?>
+    <!-- <div id="banner">
+        <div class="row">
+            <img class="banner-image" src="resources/images/background_1.jpg" alt="" />
+        </div>
+    </div> -->
+    <div id="content">
+        <div class="row">
+            <div class="offset-a4-1 col-a4-10">
+                <div class="offset-a2-2 col-a2-8">
+
+                    <div class="row">
+                        <div id="breadcrumbs">
+                            <ul>
+                                <li class="breadcrumbs-active">Neural Network Wallpaper</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-a4-12">
+                            <canvas id="canvas" class="mb-10" width="1200" height="1200" style="background-color: #000; border-radius: 0%; border:1px solid #000000; width: 1200px; height: 1200px;"></canvas>
+                            <script>
+                                var canvas = document.getElementById("canvas");
+                                var ctx = canvas.getContext("2d");
+
+                                class hsv_colour
+                                {
+                                    constructor(h,s,v,a)
+                                    {
+                                        this.h = h;
+                                        this.s = s;
+                                        this.v = v;
+                                        this.a = a;
+                                    }
+
+                                    asRGBA()
+                                    {
+                                        var r, g, b, i, f, p, q, t;
+                                        i = Math.floor(this.h * 6);
+                                        f = this.h * 6 - i;
+                                        p = this.v * (1 - this.s);
+                                        q = this.v * (1 - f * this.s);
+                                        t = this.v * (1 - (1 - f) * this.s);
+                                        switch (i % 6) {
+                                            case 0: r = this.v, g = t, b = p; break;
+                                            case 1: r = q, g = this.v, b = p; break;
+                                            case 2: r = p, g = this.v, b = t; break;
+                                            case 3: r = p, g = q, b = this.v; break;
+                                            case 4: r = t, g = p, b = this.v; break;
+                                            case 5: r = this.v, g = p, b = q; break;
+                                        }
+                                        return 'rgba('+ Math.round(r * 255) +','+ Math.round(g * 255) +','+ Math.round(b * 255) +','+ this.a +')';
+                                    }
+
+                                    addHue(h, w)
+                                    {
+                                        this.h += h * w;
+                                    }
+
+                                    random()
+                                    {
+                                        this.h = Math.random();
+                                        this.s = 1;
+                                        this.v = 1;
+                                        this.a = 1;
+                                        return this;
+                                    }
+                                }
+
+                                class colour
+                                {
+                                    constructor(r,g,b,a)
+                                    {
+                                        this.r = r;
+                                        this.g = g;
+                                        this.b = b;
+                                        this.a = a;
+                                    }
+
+                                    asRGBA()
+                                    {
+                                        return 'rgba('+ this.r +','+ this.g +','+ this.b +','+ this.a +')';
+                                    }
+
+                                    add(colour, weight)
+                                    {
+                                        this.r += colour.r * weight[0];
+                                        this.g += colour.g * weight[1];
+                                        this.b += colour.b * weight[2];
+                                        return this;
+                                    }
+
+                                    divide(number)
+                                    {
+                                        this.r = Math.round(this.r / number);
+                                        this.g = Math.round(this.g / number);
+                                        this.b = Math.round(this.b / number);
+                                        return this;
+                                    }
+
+                                    squash()
+                                    {
+                                        this.r = Math.round((1 / (1 + Math.exp(-this.r / 255))) * 255);
+                                        this.g = Math.round((1 / (1 + Math.exp(-this.g / 255))) * 255);
+                                        this.b = Math.round((1 / (1 + Math.exp(-this.b / 255))) * 255);
+                                        return this;
+                                    }
+
+                                    random()
+                                    {
+                                        this.r = Math.round(Math.random() * 255);
+                                        this.g = Math.round(Math.random() * 255);
+                                        this.b = Math.round(Math.random() * 255);
+                                        this.a = 1;
+                                        return this;
+                                    }
+                                }
+
+                                class connection
+                                {
+                                    constructor(target)
+                                    {
+                                        this.target = target;
+                                        this.weight = [Math.random(),Math.random(),Math.random()];
+                                    }
+
+                                }
+
+                                class neuron
+                                {
+                                    constructor(pos, colour) 
+                                    {
+                                        this.pos = pos;
+                                        this.connections = [];
+                                        this.parent_network;
+                                        this.colour = colour;
+                                    }
+
+                                    connectTo(neuron)
+                                    {
+                                        this.connections.push(new connection(neuron));
+                                    }
+
+                                    draw()
+                                    {
+                                        ctx.save();
+                                            ctx.translate(this.pos.x, this.pos.y);
+
+                                            ctx.fillStyle = this.colour.asRGBA();
+                                            ctx.beginPath();
+                                            ctx.arc(0,0,4,0,2*Math.PI);
+                                            ctx.fill();
+                                            ctx.closePath();
+
+                                            this.connections.forEach(connection => {
+
+                                                var rel_pos = {x:connection.target.pos.x - this.pos.x,y:connection.target.pos.y - this.pos.y};
+                                                var x_diff = rel_pos.x * 0.6;
+
+                                                var grad = ctx.createLinearGradient(0, 0, rel_pos.x, rel_pos.y);
+                                                grad.addColorStop(0, this.colour.asRGBA());
+                                                grad.addColorStop(1, connection.target.colour.asRGBA());
+
+                                                ctx.strokeStyle = grad;
+                                                ctx.beginPath();
+                                                ctx.moveTo(0,0);
+                                                ctx.bezierCurveTo(x_diff,0,rel_pos.x-x_diff,rel_pos.y,rel_pos.x,rel_pos.y);
+                                                ctx.stroke();
+                                                ctx.closePath();
+                                            });
+                                        ctx.restore();
+                                    }
+
+                                    update()
+                                    {
+                                        var new_colour = new hsv_colour(0,1,1,1);
+                                        if (this.connections.length)
+                                        {
+                                            this.connections.forEach(connection => {
+                                                new_colour.h += connection.target.colour.h * 0.1;// * connection.weight;
+                                            });
+                                            //new_colour.divide(4);
+                                            //new_colour.squash();
+                                            //if (new_colour.h > 1)
+                                                //new_colour.h = 0;
+                                        }
+                                        this.colour = new_colour;
+                                    }
+                                }
+
+                                class network
+                                {
+                                    constructor(pos)
+                                    {
+                                        this.pos = pos
+                                        this.neurons = [];
+                                    }
+
+                                    addNeuron(neuron)
+                                    {
+                                        neuron.parent_network = this;
+                                        this.neurons.push(neuron);
+                                        return neuron;
+                                    }
+
+                                    draw()
+                                    {
+                                        ctx.save();
+                                            ctx.translate(this.pos.x, this.pos.y);
+                                            this.neurons.forEach(neuron => {
+                                                neuron.draw();
+                                            });
+                                        ctx.restore();
+                                    }
+                                }
+
+                                var net = new network({x:100,y:100});
+
+                                var max_layer = 31;
+                                // var layers = [
+                                //     1,
+                                //     11,
+                                //     21,
+                                //     31,
+                                //     21,
+                                //     11,
+                                //     21,
+                                //     11,
+                                //     17,
+                                //     27,
+                                //     17,
+                                //     7
+                                // ];
+                                var layers = [
+                                    7,
+                                    11,
+                                    21,
+                                    31,
+                                    21,
+                                    11,
+                                    21,
+                                    11,
+                                    17,
+                                    27,
+                                    17,
+                                    7
+                                ];
+
+                                neuron_layers = [];
+
+                                for (layer_id = 0; layer_id < layers.length; layer_id++)
+                                {
+                                    var layer = layers[layer_id];
+                                    neuron_layers[layer_id] = [];
+                                    for (neuron_id = 0; neuron_id < layer; neuron_id++)
+                                    {
+                                        var pos = {x: layer_id * 80, y: (neuron_id + (max_layer - layer) * 0.5) * 20};
+                                        var new_neuron = net.addNeuron(new neuron(pos, new hsv_colour().random()));
+
+                                        var prev_layer_id = layer_id - 1;
+                                        for (var prev_neuron_id = 0; prev_neuron_id < layers[prev_layer_id]; prev_neuron_id++) {
+                                            var new_connection = neuron_layers[prev_layer_id][prev_neuron_id]
+                                            var x_diff = Math.abs(new_connection.pos.y - pos.y);
+                                            if (x_diff <= 100 && x_diff != 0)
+                                                new_neuron.connectTo(new_connection);
+                                        }
+
+                                        neuron_layers[layer_id][neuron_id] = new_neuron;
+                                    }
+
+                                }
+
+                                // for (layer_id = neuron_layers.length - 1; layer_id >= 0; layer_id--) {
+                                //     var l = neuron_layers[layer_id];
+                                    
+                                //     for (neuron_id = l.length - 1; neuron_id >= 0; neuron_id--) {
+                                //         var n = l[neuron_id];
+
+                                //         n.update();
+                                //     }
+                                // }
+
+                                // for (layer_id = 0; layer_id < neuron_layers.length; layer_id++) {
+                                //     if (layer_id != 0)
+                                //     {
+                                //         var l = neuron_layers[layer_id];
+                                //         for (neuron_id = 0; neuron_id < l.length; neuron_id++) {
+                                //             var n = l[neuron_id];
+
+                                //             n.update();
+                                //         }
+                                //     }
+                                // }
+
+                                //var a = net.addNeuron(new neuron({x:10,y:0}, new colour(255,0,0,1)));
+                                //var b = net.addNeuron(new neuron({x:100,y:30}, new colour(0,255,0,1)));
+                                //var c = net.addNeuron(new neuron({x:30,y:60}, new colour(0,0,255,1)));
+
+                                //a.connectTo(b);
+                                //a.connectTo(c);
+
+                                //a.update();
+
+                                mouse_pos = {x:0,y:0};
+                                canvas.addEventListener ("mousemove", function (event) {
+                                    canvas_bounds = canvas.getBoundingClientRect();
+                                    mouse_pos = {x:event.clientX - canvas_bounds.left, y:event.clientY - canvas_bounds.top};
+                                });
+
+                                var last_time = 0;
+                                function loop(cur_time)
+                                {
+                                    var dt = (cur_time - last_time) * 0.001;
+                                    last_time = cur_time;
+
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                    ctx.save();
+                                        ctx.scale(1,1);
+                                        net.draw();
+
+
+
+                                        for (layer_id = 0; layer_id < neuron_layers.length; layer_id++) {
+                                            if (layer_id != 0)
+                                            {
+                                                var l = neuron_layers[layer_id];
+                                                for (neuron_id = 0; neuron_id < l.length; neuron_id++) {
+                                                    var n = l[neuron_id];
+
+                                                    n.update();
+                                                }
+                                            }
+                                            else
+                                            {
+                                                var l = neuron_layers[layer_id];
+                                                for (neuron_id = 0; neuron_id < l.length; neuron_id++) {
+                                                    var n = l[neuron_id];
+
+                                                    n.colour.h += 0.01;
+                                                }
+                                            }
+                                        }
+
+                                    ctx.restore();
+
+                                    window.requestAnimationFrame(loop);
+                                }
+                                window.requestAnimationFrame(loop);
+                            </script>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <? $this->renderPartial('site/pages/page_footers/home.htm') ?>
+</div>
