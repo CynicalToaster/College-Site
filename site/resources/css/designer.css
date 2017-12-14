@@ -1,0 +1,25 @@
+.designer-context-container {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 9999;
+
+    padding: 0px;
+
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+.title {
+    padding: 10px;
+}
+
+.option {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background-color: #aaa;
+}

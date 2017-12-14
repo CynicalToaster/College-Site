@@ -21,20 +21,62 @@
                         <div class="panel-header">
                             <h2 class="pl-20">Projects</h2>
                         </div>
-                        <ul class="list-border">
-                            <li><a href="/projects/nn-wallpaper">Magic Neural Network</a></li>
-                            <li><a href="/projects/snake">Snake Game</a></li>
-                            <li><a href="/projects/dml_page">Dynamic Machine Learning Page</a></li>
-                            <li><a href="/projects/loading-wheel-1">Loading Wheel 1</a></li>
-                            <li><a href="/projects/loading-wheel-2">Loading Wheel 2</a></li>
-                            <li><del><a href="/projects/ajax">Ajax</a></del></li>
-                            <li><del><a href="/projects/factory_1">Factory Simulation V1</a></del></li>
-                            <li><del><a href="/projects/factory_2">Factory Simulation V2</a></del></li>
-                            <li><del><a href="/projects/mqtt">MQTT Turret Remote</a></del></li>
-                            <li><del><a href="/projects/description_generator">Description Generator</a></del></li>
-                        </ul>
+                        <div class="panel-content">
+                            <ul class="list-border">
+                                <li><a href="/projects/nn-wallpaper">Magic Neural Network</a></li>
+                                <li><a href="/projects/snake">Snake Game</a></li>
+                                <li><a href="/projects/dml_page">Dynamic Machine Learning Page</a></li>
+                                <li><a href="/projects/loading-wheel-1">Loading Wheel 1</a></li>
+                                <li><a href="/projects/loading-wheel-2">Loading Wheel 2</a></li>
+                                <li><del><a href="/projects/ajax">Ajax</a></del></li>
+                                <li><del><a href="/projects/factory_1">Factory Simulation V1</a></del></li>
+                                <li><del><a href="/projects/factory_2">Factory Simulation V2</a></del></li>
+                                <li><del><a href="/projects/mqtt">MQTT Turret Remote</a></del></li>
+                                <li><del><a href="/projects/description_generator">Description Generator</a></del></li>
+                            </ul>
+                        </div>
                     </div>
 
+                    <p>&nbsp;</p>
+
+                    <div class="panel">
+                        <div class="panel-header tabs">
+                            <div class="tab" tab-id="1">
+                                First Tab
+                            </div>
+                            <div class="tab active" tab-id="2">
+                                Active Tab
+                            </div>
+                            <div class="tab" tab-id="3">
+                                Third Tab
+                            </div>
+                            <div class="tab" tab-id="4">
+                                Last Tab
+                            </div>
+                        </div>
+
+                        <script>
+                            $('.tabs .tab').on('click', function(){
+                                $('.tabs .tab').removeClass('active');
+                                $(this).addClass('active');
+                            })
+                        </script>
+
+                        <div class="panel-content">
+                            <ul class="list-border">
+                                <li><a href="/projects/nn-wallpaper">Magic Neural Network</a></li>
+                                <li><a href="/projects/snake">Snake Game</a></li>
+                                <li><a href="/projects/dml_page">Dynamic Machine Learning Page</a></li>
+                                <li><a href="/projects/loading-wheel-1">Loading Wheel 1</a></li>
+                                <li><a href="/projects/loading-wheel-2">Loading Wheel 2</a></li>
+                                <li><del><a href="/projects/ajax">Ajax</a></del></li>
+                                <li><del><a href="/projects/factory_1">Factory Simulation V1</a></del></li>
+                                <li><del><a href="/projects/factory_2">Factory Simulation V2</a></del></li>
+                                <li><del><a href="/projects/mqtt">MQTT Turret Remote</a></del></li>
+                                <li><del><a href="/projects/description_generator">Description Generator</a></del></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
