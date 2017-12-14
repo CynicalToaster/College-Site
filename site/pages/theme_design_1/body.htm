@@ -36,6 +36,7 @@
                         </div>
 
                         <input type="text" value="Value" />
+                        <div class="message error">Please enter a valid name.</div>
                         <input type="text" value="" placeholder="Placeholder" />
 
                         <label for="text-for-label">Text For Label</label>
@@ -64,17 +65,19 @@
 
         <div class="col-md-4 pull-left">
             <div class="card">
-                <h1>Header 1</h1>
-                <h2>Header 2</h2>
-                <h3>Header 3</h3>
-                <h4>Header 4</h4>
-                <h5>Header 5</h5>
-                <h6>Header 6</h6>
-                <p>Paragraph <b>Bold</b> <strong>Strong</strong> <i>Italics</i></p>
-                <span>Span</span>
-                <a href="#">Link</a>
+                <div class="row-fluid">
+                    <div class="col-md-12 pull-left">
+                        <form name="contact-form" action="/theme.htm" onSubmit="return isValid()">
+                            <input type="text" name="name" value="" placeholder="Name" />
+                            <input type="text" name="age" value="" placeholder="Age" />
+                            <input class="btn btn-primary" type="submit" value="Submit"/>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</div>
 
     </div>
 </div>

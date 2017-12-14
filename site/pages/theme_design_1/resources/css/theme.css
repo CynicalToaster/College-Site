@@ -38,7 +38,7 @@ select {
     margin-bottom: 15px;
     width: 100%;
 
-    background-color: transparent;
+    background-color: #163850;
     border: var(--theme-border-thickness) solid #ebebeb;
     border-radius: var(--theme-border-radius);
 
@@ -73,7 +73,7 @@ input[type=text] {
     padding: 8px;
 
     color: #fff;
-    background-color: transparent;
+    background-color: #163850;
     border: var(--theme-border-thickness) solid #ebebeb;
     border-radius: var(--theme-border-radius);
 }
@@ -97,7 +97,7 @@ textarea {
     padding: 8px;
 
     color: #fff;
-    background-color: transparent;
+    background-color: #163850;
     border: var(--theme-border-thickness) solid #ebebeb;
     border-radius: var(--theme-border-radius);
 }
@@ -163,7 +163,7 @@ select {
     padding: 8px;
 
     color: #fff;
-    background-color: transparent;
+    background-color: #163850;
     border: var(--theme-border-thickness) solid #ebebeb;
     border-radius: var(--theme-border-radius);
 }
@@ -175,11 +175,27 @@ select:focus {
     color: #163850;
 }
 
-select > option {
+select option {
     padding: 8px;
 
     color: #000;
-    background-color: transparent;
-    border: var(--theme-border-thickness) solid #ebebeb;
+    background-color: #163850;
     border-radius: var(--theme-border-radius);
+}
+
+
+
+
+
+.message {
+    padding: 12px 5px 5px 5px;
+    margin: -25px 0 15px 0;
+    
+    background-color: #b63c38;
+    border: var(--theme-border-thickness) solid #b63c38;
+    border-radius: var(--theme-border-radius);
+}
+
+.message > .error {
+
 }
