@@ -27,8 +27,8 @@
                 <div class="row-fluid">
                     <div class="col-md-12 pull-left">
 
+                        <label>Checkbox</label>
                         <div class="checkbox" onClick="$(this).find('input').click()">
-                            <label>Checkbox</label>
                             <input type="checkbox" value="Test" />
                             <div class="inner">
                                 <div class="checked"><i class="fa fa-check"></i></div>
@@ -37,7 +37,9 @@
                         </div>
 
                         <input type="text" value="Value" />
-                        <div class="message error">Please enter a valid name.</div>
+                        <div class="message error">
+                            <i class="fa fa-caret-up" aria-hidden="true"></i>&nbsp;Please enter a valid name.
+                        </div>
                         <input type="text" value="" placeholder="Placeholder" />
 
                         <label for="text-for-label">Text For Label</label>
@@ -69,6 +71,7 @@
                 <div class="row-fluid">
                     <div class="col-md-12 pull-left">
                         <form name="contact-form" action="/theme.htm" onSubmit="return isValid()">
+                            <h2>Login</h2>
                             <input type="text" name="name" value="" placeholder="Name" />
                             <input type="text" name="age" value="" placeholder="Age" />
                             <input class="btn btn-primary" type="submit" value="Submit"/>
@@ -77,8 +80,5 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
     </div>
 </div>

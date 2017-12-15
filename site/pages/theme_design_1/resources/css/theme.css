@@ -72,7 +72,7 @@ select {
 
 
 input[type=text] {
-    padding: 8px;
+    padding: 8px 15px;
 
     color: #fff;
     background-color: #163850;
@@ -132,15 +132,21 @@ textarea::placeholder {
 }
 
 .checkbox .inner {
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
 
     width: 100%;
     height: 100%;
     
     border: var(--theme-border-thickness) solid #ebebeb;
     border-radius: var(--theme-border-radius);
+
+    overflow: hidden;
+
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .checkbox > input[type=checkbox]:checked + .inner {
@@ -150,10 +156,26 @@ textarea::placeholder {
     color: #163850;
 }
 
-.checkbox > .inner .checked {display: none;}
-.checkbox > .inner .unchecked {display: block;}
-.checkbox > input[type=checkbox]:checked ~ .inner .checked {display: block;}
-.checkbox > input[type=checkbox]:checked ~ .inner .unchecked {display: none;}
+.checkbox > .inner .checked {
+    /* display: none; */
+    position: absolute;
+    transform: translateY(200%);
+    transition: transform 0.3s;
+}
+.checkbox > .inner .unchecked {
+    /* display: block; */
+    position: absolute;
+    transform: translateY(0%);
+    transition: transform 0.3s;
+}
+.checkbox > input[type=checkbox]:checked ~ .inner .checked {
+    /* display: block; */
+    transform: translateY(0%);
+}
+.checkbox > input[type=checkbox]:checked ~ .inner .unchecked {
+    /* display: none; */
+    transform: translateY(-200%);
+}
 
 .checkbox > input[type=checkbox] {display: none;}
 
@@ -190,12 +212,19 @@ select option {
 
 
 .message {
-    padding: 12px 5px 5px 5px;
-    margin: -25px 0 15px 0;
+    padding: 27px 15px 8px 15px;
+    margin: -37px 0 15px 0;
     
     background-color: #b63c38;
     border: var(--theme-border-thickness) solid #b63c38;
-    border-radius: var(--theme-border-radius);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: var(--theme-border-radius);
+    border-bottom-right-radius: var(--theme-border-radius);
+}
+
+.message > i {
+    margin-right: 15px;
 }
 
 .message > .error {

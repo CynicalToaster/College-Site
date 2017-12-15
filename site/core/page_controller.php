@@ -34,7 +34,10 @@
 
         public function init()
         {
-            $url = rtrim($_SERVER['REQUEST_URI']); 
+            $url = explode('?', rtrim($_SERVER['REQUEST_URI']))[0];
+
+            traceLog($url);
+            traceLog($this->pages);
 
             if (isset($this->pages[$url]))
             {
