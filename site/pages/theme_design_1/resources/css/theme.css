@@ -27,6 +27,7 @@ select {
 
 .card {
     padding-top: 15px;
+    margin-bottom: 20px;
     background-color: #163850;
 
     border-radius: var(--theme-border-radius);
@@ -57,6 +58,14 @@ select {
     font-weight: 600;
 }
 
+.btn:not([disabled]):not(.disabled):active {
+    color: #163850;
+    background-color: #ebebeb;
+    border: var(--theme-border-thickness) solid #ebebeb;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
 .btn-primary {
     color: var(--theme-colour-highlight);
     border: var(--theme-border-thickness) solid var(--theme-colour-highlight);
@@ -68,11 +77,19 @@ select {
     border: var(--theme-border-thickness) solid var(--theme-colour-highlight);
 }
 
+.btn-primary:not([disabled]):not(.disabled):active {
+    color: #163850;
+    background-color: var(--theme-colour-highlight);
+    border: var(--theme-border-thickness) solid var(--theme-colour-highlight);
+    box-shadow: none;
+    opacity: 0.6;
+}
+
 
 
 
 input[type=text] {
-    padding: 8px 15px;
+    padding: 8px 12px;
 
     color: #fff;
     background-color: #163850;
@@ -122,62 +139,113 @@ textarea::placeholder {
 .checkbox {
     display: inline-block;
     cursor: pointer;
-
     margin-bottom: 15px;
-
     width: 44px;
     height: 44px;
-
     font-size: 16px;
 }
-
 .checkbox .inner {
     display: flex;
     justify-content: center;
     align-items: center;
-
     position: relative;
-
     width: 100%;
     height: 100%;
-    
     border: var(--theme-border-thickness) solid #ebebeb;
     border-radius: var(--theme-border-radius);
-
     overflow: hidden;
-
     transition: background-color 0.3s, color 0.3s;
 }
-
 .checkbox > input[type=checkbox]:checked + .inner {
     background-color: #ebebeb;
     border: var(--theme-border-thickness) solid #ebebeb;
-
     color: #163850;
 }
-
 .checkbox > .inner .checked {
-    /* display: none; */
     position: absolute;
     transform: translateY(200%);
     transition: transform 0.3s;
 }
 .checkbox > .inner .unchecked {
-    /* display: block; */
     position: absolute;
     transform: translateY(0%);
     transition: transform 0.3s;
 }
-.checkbox > input[type=checkbox]:checked ~ .inner .checked {
-    /* display: block; */
-    transform: translateY(0%);
+.checkbox > input[type=checkbox]:checked ~ .inner .checked {transform: translateY(0%);}
+.checkbox > input[type=checkbox]:checked ~ .inner .unchecked {transform: translateY(-200%);}
+.checkbox > input[type=checkbox] {display: none;}
+
+
+
+
+
+
+.togglebox {
+    display: inline-block;
+    cursor: pointer;
+    margin-bottom: 15px;
+    width: 88px;
+    height: 44px;
+    font-size: 16px;
 }
-.checkbox > input[type=checkbox]:checked ~ .inner .unchecked {
-    /* display: none; */
-    transform: translateY(-200%);
+.togglebox > .inner {
+    /* display: flex;
+    justify-content: center;
+    align-items: center; */
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: var(--theme-border-thickness) solid #ebebeb;
+    border-radius: var(--theme-border-radius);
+    overflow: hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+/* .togglebox > input[type=checkbox]:checked + .inner {
+    background-color: #ebebeb;
+    border: var(--theme-border-thickness) solid #ebebeb;
+    color: #163850;
+} */
+.togglebox .inner .value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+.togglebox > input[type=checkbox] {display: none;}
+
+.togglebox > input[type=checkbox] ~ .inner > .toggle {
+    position: absolute;
+    left: 0%;
+    width: 50%;
+    height: 100%;
+    background-color: #ebebeb;
+    overflow: hidden;
+    transition: left 0.3s;
 }
 
-.checkbox > input[type=checkbox] {display: none;}
+.togglebox > input[type=checkbox]:checked ~ .inner > .toggle {
+    left: 50%;
+}
+
+.togglebox > .inner > .toggle > .inner {
+    position: absolute;
+    left: 0%;
+    width: 200%;
+    height: 100%;
+    color: #163850;
+    transition: left 0.3s;
+}
+
+.togglebox > input[type=checkbox]:checked ~ .inner > .toggle > .inner {
+    left: -100%;
+}
+
+
+
+
+
 
 
 
@@ -229,4 +297,25 @@ select option {
 
 .message > .error {
 
+}
+
+
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.4);
+    overflow: hidden;
+}
+
+.popup > .inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: calc(100% - 20px);
 }

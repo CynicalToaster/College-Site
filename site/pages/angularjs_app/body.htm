@@ -7,26 +7,10 @@
 <div class="container-fluid">
     <div class="row-fluid">
 
-        <div class="col-md-4 pull-left">
+        <div class="col-md-6 pull-left">
             <div class="card">
-                <h1>Header 1</h1>
-                <h2>Header 2</h2>
-                <h3>Header 3</h3>
-                <h4>Header 4</h4>
-                <h5>Header 5</h5>
-                <h6>Header 6</h6>
-                <p>Paragraph <b>Bold</b> <strong>Strong</strong> <i>Italics</i></p>
-                <span>Span</span>
-                <a href="#">Link</a>
-            </div>
-        </div>
-
-        <div class="col-md-4 pull-left">
-            <div class="card">
-
                 <div class="row-fluid">
                     <div class="col-md-12 pull-left">
-
                         <label>Checkbox</label>
                         <div class="checkbox" onClick="$(this).find('input').click()">
                             <input type="checkbox" value="Test" />
@@ -81,19 +65,62 @@
             </div>
         </div>
 
-        <div class="col-md-4 pull-left">
-            <div class="card">
-                <div class="row-fluid">
-                    <div class="col-md-12 pull-left">
-                        <form name="contact-form" action="/theme.htm" onSubmit="return isValid()">
-                            <h2>Login</h2>
-                            <input type="text" name="name" value="" placeholder="Name" />
-                            <input type="text" name="age" value="" placeholder="Age" />
-                            <input class="btn btn-primary" type="submit" value="Submit"/>
-                        </form>
+        <!-- <div>
+
+            <div class="col-md-6 pull-left">
+                <div class="card">
+                    <div class="row-fluid">
+                        <div class="col-md-12 pull-left">
+                            <div data-login data-name="Test"></div>
+                        </div>
                     </div>
                 </div>
             </div>
+        
+            <div class="col-md-6 pull-left">
+                <div class="card">
+                    <div class="row-fluid">
+                        <div class="col-md-12 pull-left">
+                            <p>Nothing here {{'yet' + '!'}}</p>
+                            <input type="text" data-ng-model="nameFilter" placeholder="Search..."/>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th colspan="4">Drivers Championship Standings</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-ng-repeat="driver in driversList | filter: nameFilter">
+                                        <td>{{$index + 1}}</td>
+                                        <td>
+                                            <img src="img/flags/{{driver.Driver.nationality}}.png" />
+                                            {{driver.Driver.givenName}}&nbsp;{{driver.Driver.familyName}}
+                                        </td>
+                                        <td>{{driver.Constructors[0].name}}</td>
+                                        <td>{{driver.points}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
+        <div data-ng-app="LogoDesigner" data-ng-controller="designerController">
+            <div class="col-md-6 pull-left">
+                <div class="card">
+                    <div class="row-fluid">
+                        <div class="col-md-6 pull-left">
+                            <div class="btn btn-primary" data-ng-click="">Logo Designer</div>
+                        </div>
+                    </div>
+                    <div data-popup></div>
+                </div>
+            </div>
         </div>
+
+
     </div>
 </div>
