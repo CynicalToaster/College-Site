@@ -4,10 +4,70 @@
     }
 </style>
 
-<div class="container-fluid">
-    <div class="row-fluid">
+<div class="container-fluid" data-ng-app="store">
+    <div class="row-fluid" data-ng-controller="productController">
+        
+        <div class="card col-md-4 pull-right">
+            <select>
+                <option>Test1</option>
+                <option>Test2</option>
+                <option>Test3</option>
+            </select>
 
-        <div class="col-md-6 pull-left">
+            <div class="dropdown">
+                <div class="inner">Test1<i class="arrow fa fa-caret-down"></i></div>
+                <div class="options">
+                    <div class="inner">
+                        <div class="option">Test1</div>
+                        <div class="option">Test2</div>
+                        <div class="option">Test3</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <div class="inner">Test1<i class="arrow fa fa-caret-down"></i></div>
+                <div class="options">
+                    <div class="inner">
+                        <div class="option">Test1</div>
+                        <div class="option">Test2</div>
+                        <div class="option">Test3</div>
+                    </div>
+                </div>
+            </div>
+
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+
+            <script>
+                $('.dropdown').on('click', function(e) {
+                    var dropdown = $(e.currentTarget);
+                    var options = dropdown.find('.options');
+                    var inner = options.find('.inner');
+                    
+                    if (dropdown.hasClass('open')) {
+                        dropdown.removeClass('open');
+                        options.css('height', 0);
+                    } else {
+                        dropdown.addClass('open');
+                        options.css('height', inner.height());
+                    }
+                });
+            </script>
+        </div>
+        
+        <div data-product></div>
+        
+        <!-- <div class="col-md-6 pull-left">
             <div class="card">
                 <div class="row-fluid">
                     <div class="col-md-12 pull-left">
@@ -63,7 +123,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!-- <div>
 
@@ -108,18 +168,14 @@
         </div> -->
 
 
-        <div data-ng-app="LogoDesigner" data-ng-controller="designerController">
-            <div class="col-md-6 pull-left">
+        <!-- <div data-ng-app="LogoDesigner" data-ng-controller="designerController">
+            <div class="col-md-12 pull-left">
                 <div class="card">
-                    <div class="row-fluid">
-                        <div class="col-md-6 pull-left">
-                            <div class="btn btn-primary" data-ng-click="">Logo Designer</div>
-                        </div>
-                    </div>
+                    <div data-logo-designer></div>
                     <div data-popup data-inner-directive="login"></div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
 
     </div>
