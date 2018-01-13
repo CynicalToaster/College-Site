@@ -9,20 +9,38 @@ var store_app = angular.module('product.controllers', [])
         options: {
             colours: {
                 name: 'Colours',
-                values: [
-                    'Navy Blue',
-                    'Dark Grey'
-                ]
+                values: {
+                    'Dark Grey' : '555555',
+                    'White' : 'FFFFFF',
+                    'Navy Blue' : '0D1B30',
+                    'Black' : '000',
+                    'Bright Blue' : '2173D9',
+                    'Athletic Grey' : 'DADADA',
+                    'Red Wine' : '702225',
+                    'Rapanui Green' : '567726',
+                    'Mustard' : 'DEAC17',
+                    'Red' : 'C52020',
+                    'Denim Blue' : '1F424B',
+                    'Tan' : '937E6E',
+                }
             },
             sizes: {
                 name: 'Sizes',
-                values: [
-                    'XS',
-                    'S',
-                    'M',
-                    'L',
-                    'XL'
-                ]
+                values: {
+                    'XS' : '',
+                    'S' : '',
+                    'M' : '',
+                    'L' : '',
+                    'XL' : ''
+                }
+            },
+            fabrics: {
+                name: 'Fabrics',
+                values: {
+                    'Cotton' : '',
+                    'Organic Cotton' : '',
+                    'Bamboo' : ''
+                }
             }
         },
         images: {
@@ -42,9 +60,9 @@ var store_app = angular.module('product.controllers', [])
     $scope.getImages = function(product_images) {
         var images = [];
 
-        for (const key in product_images) {
+        for (key in product_images) {
             if (product_images.hasOwnProperty(key)) {
-                const element = product_images[key];
+                var element = product_images[key];
                 images = images.concat(element);
             }
         }
@@ -81,16 +99,22 @@ var store_app = angular.module('product.controllers', [])
             '<div class="card">' +
                 '<div class="row">' +
                     '<div class="col-md-12">' +
-                        '<div class="swiper-container">' +
-                            '<div class="swiper-wrapper">' +
-                                '<img data-ng-repeat="(id,image) in getImages(productExample.images)" class="swiper-slide" src="{{image}}" />' +
+                        '<div id="image-preview" class="row">' +
+                            '<div class="col-md" style="width: 20%; padding-right: 0;">' +
+                                '<div class="gallary swiper-container">' +
+                                    '<div class="swiper-wrapper">' +
+                                        '<img data-ng-repeat="(id,image) in getImages(productExample.images)" class="swiper-slide" src="{{image}}"/>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="col-md" style="width: 80%;">' +
+                                '<div class="preview swiper-container">' +
+                                    '<div class="swiper-wrapper">' +
+                                        '<img data-ng-repeat="(id,image) in getImages(productExample.images)" class="swiper-slide" src="{{image}}"/>' +
+                                    '</div>' +
+                                '</div>' +
                             '</div>' +
                         '</div>' +
-                        '<script>' +
-                            'var swiper = new Swiper(\'.swiper-container\', {' +
-                                'spaceBetween: 15,' +
-                            '});' +
-                        '</script>' +
                     '</div>' +
                 '</div>' +
             '</div>',
@@ -117,9 +141,21 @@ var store_app = angular.module('product.controllers', [])
 
                         '<div data-ng-repeat="(key, option) in productExample.options">' +
                             '<label>{{option.name}}</label>' +
-                            '<select>' +
-                                '<option data-ng-repeat="value in option.values">{{value}}</option>' +
+
+
+                            
+                            '<select data-ng-if="key != \'colours\'">' +
+                                '<option data-ng-repeat="(name, value) in option.values">{{name}}</option>' +
                             '</select>' +
+
+                            '<div class="colour-pallet" data-ng-if="key == \'colours\'">' +
+                                '<a href="#" class="colour" data-ng-repeat="(name, value) in option.values">' +
+                                    '<span class="inner" style="background-color: #{{value}};"></span>' +
+                                '</a>' +
+                            '</div>' +
+
+
+
                         '</div>' +
 
                         '<div class="row">' +

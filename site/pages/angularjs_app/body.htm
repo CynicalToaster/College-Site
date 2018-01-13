@@ -6,8 +6,12 @@
 
 <div class="container-fluid" data-ng-app="store">
     <div class="row-fluid" data-ng-controller="productController">
+
+        <div class="card col-md-6 pull-left" style="display: block;">
+            <canvas id="nn-canvas" style="display: block; border: 1px solid #000; width: 400px; height: 400px;" width="400" height="400"></canvas>
+        </div>
         
-        <div class="card col-md-4 pull-right">
+        <div class="card col-md-4 pull-right" style="display: none;">
             <select>
                 <option>Test1</option>
                 <option>Test2</option>
@@ -36,6 +40,9 @@
                 </div>
             </div>
 
+            <div class="btn">Secondary Button</div>
+            <div class="btn primary">Primary Button</div>
+
             <span>&nbsp;</span>
             <span>&nbsp;</span>
             <span>&nbsp;</span>
@@ -59,9 +66,19 @@
                         options.css('height', 0);
                     } else {
                         dropdown.addClass('open');
-                        options.css('height', inner.height());
+                        options.css('height', inner.outerHeight(true));
                     }
                 });
+
+                // $(document).on('click', function(e) {
+                //     if ($(e.currentTarget).parents().hasClass('dropdown')) {
+                //         var dropdowns = $('.dropdown')
+                //         dropdowns.each(function(dropdown) {
+                //             $(this).removeClass('open');
+                //             $(this).find('.options').find('.inner').css('height', 0);
+                //         });
+                //     }
+                // });
             </script>
         </div>
         
