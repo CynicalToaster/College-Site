@@ -1,0 +1,260 @@
+<div id="page" class="container">
+    <? $this->renderPartial('site/pages/page_headers/home.htm') ?>
+    <!-- <div id="banner">
+        <div class="row">
+            <img class="banner-image" src="resources/images/background_1.jpg" alt="" />
+        </div>
+    </div> -->
+    <div id="content">
+        <div class="row">
+            <div class="offset-a4-1 col-a4-10">
+                <div class="offset-a2-2 col-a2-8">
+
+                    <div class="row">
+                        <div id="breadcrumbs">
+                            <ul>
+                                <li class="breadcrumbs-crumb">
+                                    <a href="/home">Home</a>
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                </li>
+                                <li class="breadcrumbs-crumb">
+                                    <a href="/projects">Projects</a>
+                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                </li>
+                                <li class="breadcrumbs-active">Voxel Engine Prototype</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-a3-12">
+                        <div class="panel">
+                            <div class="panel-header">
+                                <h2 class="pl-20">Voxel Engine Prototype</h2>
+                            </div>
+
+                            <style>
+                                #canvas {
+                                    /* width: 50%;  */
+                                    /* height: 400px;  */
+                                    max-width: 100%;
+                                    border: 1px solid #ddd; 
+                                    box-shadow: 0px 0px 4px -2px #000;
+                                }
+                            </style>
+                            
+                            <div class="row">
+                                <canvas id="canvas" class="mb-10" width="600" height="400" />
+                            </div>
+
+                            <script>
+                                function getRandomInt(max) {
+                                    return Math.floor(Math.random() * Math.floor(max));
+                                }
+
+                                class voxelOrigin {
+                                    constructor() {
+                                        this.voxels = [];
+                                        this.position = {x:0,y:200};
+
+                                        for (var x = 0; x < 10; x++)
+                                        {
+                                            var new_voxel = new voxel({x:(x * 60),y:100},{x:60,y:20}, 1);
+                                            this.voxels.push(new_voxel);
+                                        }
+                                    }
+
+                                    draw() {
+                                        ctx.save();
+                                        ctx.translate(this.position.x, this.position.y);
+                                            this.voxels.forEach(voxel => {
+                                                voxel.draw(1, this.position);
+                                            });
+                                        ctx.restore();
+                                    }
+                                }
+
+                                class voxel {
+                                    constructor(position, size, level) {
+                                        this.position = position;
+                                        this.size = size;
+                                        this.visible = true;
+                                        this.subVoxels = [];
+                                        this.parent = null;
+
+                                        var childSize = this.size.x / 2;
+
+                                        if (level <= 5) {
+                                            for (var x = 0; x < 2; x++)
+                                            {
+                                                var yPos = (Math.sin(x * 0.01) * 200);
+
+                                                var new_voxel = new voxel({x:(x * childSize),y:yPos},{x:childSize,y:20}, level + 1);
+                                                new_voxel.parent = this;
+                                                this.subVoxels.push(new_voxel);
+                                            }
+                                        }
+                                    }
+
+                                    get worldPosition() {
+                                        var position = {x:0, y:0};
+                                        
+                                    }
+
+                                    draw(level, translate) {
+                                        if (level == 1)
+                                            ctx.fillStyle="#f00";
+                                        else if (level == 2)
+                                            ctx.fillStyle="#0f0";
+                                        else if (level == 3)
+                                            ctx.fillStyle="#00f";
+                                        else if (level == 4)
+                                            ctx.fillStyle="#0ff";
+                                        else if (level == 6)
+                                            ctx.fillStyle="#f0f";
+                                        else if (level == 6)
+                                            ctx.fillStyle="#ff0";
+                                        else
+                                            ctx.fillStyle="#000";
+
+                                        ctx.save();
+                                        ctx.translate(this.position.x, this.position.y);
+
+                                            translate = {x: translate.x + this.position.x, y: translate.y + this.position.y}
+
+                                            if (mouse.x < (translate.x) + 3 * this.size.x && mouse.x > (translate.x) - 3 * this.size.x)
+                                                this.visible = true;
+                                            else
+                                                this.visible = false;                                        
+
+                                            if (this.visible && this.subVoxels.length)
+                                            {
+                                                this.subVoxels.forEach(voxel => {
+                                                    voxel.draw(level + 1, translate);
+                                                });
+                                            }
+                                            else
+                                            {
+                                                ctx.beginPath();
+                                                ctx.rect(0, 0, this.size.x, this.size.y);
+                                                ctx.fill();
+                                                ctx.closePath();
+                                            }
+
+                                        ctx.restore();
+                                    }
+
+
+                                }
+                            </script>
+
+                            <script>
+                                $('#canvas').ready(function() {
+                                    canvas = document.getElementById("canvas");
+                                    ctx = canvas.getContext('2d');
+
+                                    keys = {};
+                                    mouse = {};
+
+                                    var voxel_origin = new voxelOrigin();
+
+                                    window.addEventListener("keydown",
+                                        function(e){
+                                            keys[e.key] = true;
+                                        },
+                                    false);
+
+                                    window.addEventListener("keyup",
+                                        function(e){
+                                            keys[e.key] = false;
+                                        },
+                                    false);
+
+                                    function input()
+                                    {
+
+                                    }
+
+                                    var interval = 0;
+                                    function update(cur_time, dt)
+                                    {
+
+                                    }
+
+                                    function draw(cur_time, dt)
+                                    {
+                                        last_draw = cur_time;
+                                        
+                                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                                        ctx.textAlign="start"; 
+                                        ctx.font = '12px Arial';
+                                        ctx.fillStyle="#444";
+                                        ctx.fillText(Math.round((1 / dt) * 100) * 0.01 + ' fps',10,20);
+
+                                        voxel_origin.draw();
+
+                                        // ctx.fillStyle="#44AA44";
+                                        // ctx.beginPath();
+                                        // food.forEach(function(food_cell) {
+                                        //     ctx.arc( food_cell.x * scale.x + (scale.x * 0.5), food_cell.y * scale.y + (scale.y * 0.6), scale.x * 0.4, 0, 2*Math.PI);
+                                        //     ctx.fill();
+                                        // }, this);
+                                        // ctx.closePath();
+                                        
+                                        // ctx.fillStyle="#444";
+                                        // ctx.strokeStyle="#aaa";
+                                        // ctx.beginPath();
+                                        // ctx.arc( (cell_draw.x + ( (cell.x - cell_draw.x) * progress )) * scale.x + (scale.x * 0.5), (cell_draw.y + ( (cell.y - cell_draw.y) * progress )) * scale.y + (scale.y * 0.5), scale.x * 0.5, 0, 2*Math.PI);
+                                        // ctx.fill();
+                                        // ctx.stroke();
+                                        // ctx.closePath();
+
+
+                                        // var cells = getAdjacentCells(snake[0], false)
+
+                                        // ctx.fillStyle="#00f";
+                                        // cells.forEach(function(cell) {
+                                        //     ctx.beginPath();
+                                        //     ctx.rect(cell.x * scale.x, cell.y * scale.y, scale.x - 1,scale.y - 1);
+                                        //     ctx.fill();
+                                        //     ctx.closePath();
+                                        // }, this);
+
+                                        // ctx.fillStyle="#f00";                                      
+                                        // ctx.beginPath();
+                                        // snake.forEach(function(cell) {
+                                        //     ctx.rect(cell.x * scale.x + 2, cell.y * scale.y + 2, scale.x - 5,scale.y - 5);
+                                        //     ctx.fill();
+                                        // }, this);
+                                        // ctx.closePath();
+                                    }
+
+                                    $(document).on('mousemove', function(e) {
+                                        var bounds = canvas.getBoundingClientRect()
+                                        mouse = {x: e.clientX - bounds.left, y: e.clientY - bounds.top};
+                                    });
+
+                                    var last_time = 0;
+                                    function loop(cur_time)
+                                    {
+                                        var dt = (cur_time - last_time) * 0.001;
+                                        last_time = cur_time;
+
+                                        input();
+                                        update(cur_time, dt);
+                                        draw(cur_time, dt);
+
+                                        window.requestAnimationFrame(loop);
+                                    }
+                                    window.requestAnimationFrame(loop);
+                                });
+                            </script>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <? $this->renderPartial('site/pages/page_footers/home.htm') ?>
+</div>
