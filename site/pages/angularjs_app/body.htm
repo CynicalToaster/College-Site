@@ -1,17 +1,35 @@
-<style>
-    body {
-        padding-top: 50px;
-    }
-</style>
 
-<div class="container-fluid" data-ng-app="store">
+<div class="container-fluid" data-ng-app="logoDesigner">
+    <div class="row-fluid" data-ng-controller="logoDesignerController">
+        <div class="offset-md-3 col-md-6">
+            <div class="popup-container">
+                <div class="popup padded">
+                    <div class="popup-content">
+                        <div data-logo-designer></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form id="svgform" method="post" action="download.pl">
+    <input type="hidden" id="output_format" name="output_format" value="">
+    <input type="hidden" id="data" name="data" value="">
+</form>
+
+
+
+
+
+<div class="container-fluid" data-ng-app="store" style="display: none;">
     <div class="row-fluid" data-ng-controller="productController">
 
-        <div class="card col-md-6 pull-left" style="display: block;">
+        <div class="card col-md-6 pull-left" style="display: none;">
             <canvas id="nn-canvas" style="display: block; border: 1px solid #000; width: 400px; height: 400px;" width="400" height="400"></canvas>
         </div>
         
-        <div class="card col-md-4 pull-right" style="display: none;">
+        <div class="card col-md-4 pull-right" style="display: block;">
             <select>
                 <option>Test1</option>
                 <option>Test2</option>
@@ -28,7 +46,7 @@
                     </div>
                 </div>
             </div>
-
+``
             <div class="dropdown">
                 <div class="inner">Test1<i class="arrow fa fa-caret-down"></i></div>
                 <div class="options">
@@ -42,18 +60,6 @@
 
             <div class="btn">Secondary Button</div>
             <div class="btn primary">Primary Button</div>
-
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
-            <span>&nbsp;</span>
 
             <script>
                 $('.dropdown').on('click', function(e) {
@@ -70,15 +76,15 @@
                     }
                 });
 
-                // $(document).on('click', function(e) {
-                //     if ($(e.currentTarget).parents().hasClass('dropdown')) {
-                //         var dropdowns = $('.dropdown')
-                //         dropdowns.each(function(dropdown) {
-                //             $(this).removeClass('open');
-                //             $(this).find('.options').find('.inner').css('height', 0);
-                //         });
-                //     }
-                // });
+                $(document).on('click', function(e) {
+                    if ($(e.currentTarget).parents().hasClass('dropdown')) {
+                        var dropdowns = $('.dropdown')
+                        dropdowns.each(function(dropdown) {
+                            $(this).removeClass('open');
+                            $(this).find('.options').find('.inner').css('height', 0);
+                        });
+                    }
+                });
             </script>
         </div>
         

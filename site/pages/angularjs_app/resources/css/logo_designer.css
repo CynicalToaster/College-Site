@@ -1,0 +1,29 @@
+.logo-designer {
+    
+}
+
+.logo-designer > .header {
+    padding-bottom: 20px;
+}
+
+.logo-designer > .content {
+    position: relative;
+}
+
+.logo-designer .logo-toolbox {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+}
+
+.logo-designer .logo-canvas {
+    margin: 20px 0;
+    border: 1px solid #000;
+}
+
+.logo-designer .logo-canvas svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #f00
+}
