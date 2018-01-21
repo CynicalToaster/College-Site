@@ -2,7 +2,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis|Lato|Open+Sans|Varela+Round|Pacifico">
+<!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis|Lato|Open+Sans|Varela+Round|Pacifico"> -->
 <link rel="stylesheet" href="/site/resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/site/resources/css/font-awesome.min.css">
 <link rel="stylesheet" href="/site/resources/css/swiper.min.css"/>
@@ -14,7 +14,49 @@
 <script src="/site/resources/js/jquery-3.2.1.min.js"></script>
 <script src="/site/resources/js/popper.min.js"></script>
 <script src="/site/resources/js/bootstrap.min.js"></script>
+<script src="/site/resources/js/d3.min.js"></script>
 <script src="/site/resources/js/angular.min.js"></script>
 
 <script src="/site/pages/solar_system_map/angular/solar_system_map/app.js"></script>
 <script src="/site/pages/solar_system_map/angular/solar_system_map/controllers.js"></script>
+
+<script>
+    function randomRange(min, max) {
+        return Math.floor((Math.random() * ((max - min) + 1)) + min);
+    }
+
+    function gaussianRand(spread) {
+        var rand = 0;
+
+        for (var i = 0; i < spread; i += 1) {
+            rand += Math.random();
+        }
+
+        return (rand / spread) * 2 - 1;
+    }
+
+    function invertDistribution(val) {
+        if (val < 0) {
+            return -1 - val;
+        } else if (val > 0) {
+            return 1 - val;
+        } else {
+            return val;
+        }
+    }
+
+    function length(vector) {
+        return Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
+    }
+
+    function inCircle() {
+        var point = [0,0];
+
+        do {
+            point = [gaussianRand(1),gaussianRand(2)];
+        } while (length(point) > 1);
+
+        return point;
+    }
+
+</script>
