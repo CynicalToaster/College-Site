@@ -1,0 +1,23 @@
+.grid-container {
+    border: 1px solid #f00;
+    overflow: hidden;
+}
+
+.grid-content-slot {
+    width: 250px;
+    height: 250px;
+    border: 1px solid #0f0;
+}
+
+.grid-content-block {
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    border: 1px solid #00f;
+    background-color: #f4f4f4;
+}
+
+.grid-content-block.holding {
+    box-shadow: 5px 6px 8px -2px rgba(0,0,0,0.4), inset 0 0 2px #00f;
+    z-index: 9999;
+}
