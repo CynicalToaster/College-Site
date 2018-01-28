@@ -63,7 +63,7 @@
 }
 
 .grid-stack>.grid-stack-item.ui-draggable-dragging>.grid-stack-item-content,.grid-stack>.grid-stack-item.ui-resizable-resizing>.grid-stack-item-content {
-    box-shadow: 1px 4px 6px rgba(0,0,0,.2);
+    box-shadow: 0px 0px 6px rgba(0,0,0,.2);
     opacity: .8
 }
 

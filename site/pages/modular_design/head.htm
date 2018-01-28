@@ -34,12 +34,66 @@
 
 <style>
     .grid-stack-item > .grid-stack-item-content {
-        background-color: #f4f4f4;
-        border: 1px solid #d6d6d6;
+        padding: 20px;
+        background-color: none;
+        border: none;
+        /* border: 1px solid #d6d6d6; */
+        border-radius: 4px;
     }
 
     .grid-stack-placeholder > .placeholder-content {
-        background-color: rgba(0,0,0,0.2);
-        border: 1px solid #d6d6d6 !important;
+        /* background-color: rgba(0,0,0,0.05); */
+        border: 1px dashed #d6d6d6 !important;
+        border-radius: 4px;
+    }
+
+    ul {
+        padding-left: 0;
+        margin-bottom: 0;
+    }
+
+    li {
+        list-style: none;
+        margin-bottom: 10px;
+        line-height: 20px;
+    }
+
+    .column-list p {
+        font-size: 16px;
+        padding-bottom: 10px;
+        border-bottom: #E8E8E8 solid 1px;
+        color: #000000;
+        font-weight: bold;
+    }
+
+    ul a {
+        text-decoration: none;
+        color: #000000;
+    }
+
+    ul a:hover {
+        text-decoration: none;
+        /* font-weight: 700; */
+        text-shadow: 1px 0 0 #000;
+        color: #000 !important;
+    }
+
+    a {
+        text-decoration: none;
+        font-size: 16px;
+        display: block;
+    }
+
+
+
+    .grid-stack-item > .grid-stack-item-content .img {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
     }
 </style>
