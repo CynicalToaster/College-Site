@@ -1,7 +1,7 @@
 var store_app = angular.module('modular_design.core', [])
 .controller('core_controller', function($scope) {
-    $scope.content = {
-        printing_services: {
+    $scope.content = [
+        {
             type: 'list',
             title: 'Printing Services',
             links: [
@@ -12,9 +12,11 @@ var store_app = angular.module('modular_design.core', [])
                 {text: 'Artwork Templates &amp; Advice', href: '/screen-printing-t-shirt-artwork-requirements/'},
                 {text: 'Sample Prints', href: '/product/refundable-print-quality-sample/'},
                 {text: 'Our Range', href: '/view-our-range/'}
-            ]
+            ],
+            position: {x:0,y:0},
+            size: {x:1,y:1}
         },
-        blog: {
+        {
             type: 'list',
             title: 'Blog',
             links: [
@@ -23,14 +25,27 @@ var store_app = angular.module('modular_design.core', [])
                 {text: 'Help &amp; Advice', href: '/blog/uktsp-help-advice/'},
                 {text: 'Organic Products', href: '/blog/uktsp-organic-clothing/'},
                 {text: 'Saving Money', href: '/blog/uktsp-saving-money/'}
-            ]
+            ],
+            position: {x:1,y:0},
+            size: {x:1,y:1}
         },
-        design_online: {
+        {
             type: 'image',
             title: 'Design Online',
-            img_url: '/site/resources/images/background_1.jpg',
+            img_url: '/site/resources/images/backgrounds/background_'+ (Math.floor(Math.random() * 18) + 1) +'.jpg',
+            href: '/test/',
+            position: {x:2,y:0},
+            size: {x:1,y:1}
+        },
+        {
+            type: 'image',
+            title: 'Design Online',
+            img_url: '/site/resources/images/backgrounds/background_'+ (Math.floor(Math.random() * 18) + 1) +'.jpg',
+            href: '/test/',
+            position: {x:3,y:0},
+            size: {x:1,y:1}
         }
-    };
+    ];
 })
 
 .directive('contentBlock', function($compile) {
@@ -69,7 +84,9 @@ var store_app = angular.module('modular_design.core', [])
         },
         template: 
             //'<img src="{{data.img_url}}" />' +
-            '<div class="img" style="background-image: url(\'{{data.img_url}}\');">' +
-            '</div>',
+            '<a href="{{data.href}}">' +
+                '<div class="img" style="background-image: url(\'{{data.img_url}}\');"></div>' +
+                '<div class="caption" href="{{data.href}}"><strong>{{data.title}}</strong></div>' +
+            '</a>',
     };
 });

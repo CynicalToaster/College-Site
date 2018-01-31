@@ -84,7 +84,9 @@
         display: block;
     }
 
-
+    .grid-stack-item > .grid-stack-item-content {
+        overflow: hidden;
+    }
 
     .grid-stack-item > .grid-stack-item-content .img {
         position: absolute;
@@ -95,5 +97,23 @@
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
+        transform: scale(1.0);
+        transition: transform 0.2s;
+    }
+
+    .grid-stack-item > .grid-stack-item-content:hover .img {
+        /* transform: scale(1.05); */
+    }
+
+    .grid-stack-item > .grid-stack-item-content .caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+        padding: 10px;
+        text-align: center;
+        background-color: #000a;
+        color: #fff;
     }
 </style>

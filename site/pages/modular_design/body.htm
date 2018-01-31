@@ -3,7 +3,8 @@
         <div class="col-md-12">
             <div class="grid-stack" data-gs-width="4" data-gs-height="2" style="height: 500px;">
                 <div data-ng-repeat="(id, block) in content" class="grid-stack-item"
-                    data-gs-width="1" data-gs-height="1" data-gs-max-height="1">
+                    data-gs-x="{{block.position.x}}" data-gs-y="{{block.position.y}}"
+                    data-gs-width="{{block.size.x}}" data-gs-height="{{block.size.y}}">
                         <div class="grid-stack-item-content">
                             <div data-content-block data="block" class="column-list"></div>
                         </div>
