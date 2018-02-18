@@ -1,3 +1,4 @@
 angular.module('store', [
-    'product.controllers'
+    'product.controllers',
+    'product.services'
 ]);
