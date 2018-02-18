@@ -1,0 +1,183 @@
+<title>eCommerce Design</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Scripts -->
+<script src="/site/resources/js/jquery-3.2.1.min.js"></script>
+<script src="/site/resources/js/popper.min.js"></script>
+<script src="/site/resources/js/bootstrap.min.js"></script>
+<script src="/site/resources/js/swiper.min.js"></script>
+<script src="/site/resources/js/angular.min.js"></script>
+
+<script src="/site/pages/ecom/angular/products.js"></script>
+<script src="/site/pages/ecom/angular/app.js"></script>
+<script src="/site/pages/ecom/angular/services.js"></script>
+<script src="/site/pages/ecom/angular/controller.js"></script>
+
+<!-- Styles -->
+<link rel="stylesheet" href="/site/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/site/resources/css/font-awesome.min.css">
+<link rel="stylesheet" href="/site/resources/css/swiper.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis|Lato|Open+Sans|Inconsolata">
+
+<style>
+    .hidden {display: none;}
+
+    body {
+        font-family: 'Inconsolata', monospace;
+        font-size: 14px;
+
+        background-color: #efefef;
+    }
+
+    .page > .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        background-color: #fff;
+    }
+
+    .header > .title {
+        float: left;
+        padding: 20px;
+        margin: 0;
+        height: 100%;
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+
+
+
+
+
+    .header > .nav-tabs {
+        float: left;
+        margin: 0 auto;
+        height: 100%;
+    }
+
+    .nav-tabs {
+        border: none;
+    }
+
+    .nav-tabs > .tab {
+        float: left;
+        position: relative;
+        padding: 20px 0;
+        margin: 0 10px;
+        height: 100%;
+        cursor: pointer;
+    }
+
+    .nav-tabs > .tab > p {
+        padding: 0 20px;
+    }
+
+    .nav-tabs > .tab > .highlight {
+        position: absolute;
+        left: 100%;
+        bottom: 12px;
+        width: 0%;
+        height: 1px;
+        background-color: #000;
+        transition: width 0.2s ease-in-out, left 0.2s ease-in-out;
+    }
+
+    .nav-tabs > .tab:hover > .highlight {
+        left: 0%;
+        width: 100%;
+        transition: width 0.2s ease-in-out, left 0s ease-in-out;
+    }
+
+
+
+
+    .header .nav-tab-content {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+
+        background-color: #fff;
+    }
+
+    .nav-tab-content .tab {
+
+    }
+
+    .nav-tab-content > .tab > .block {
+        position: relative;
+        float: left;
+        padding: 0 20px;
+        width: 25%;
+    }
+
+
+    .block.list > p {
+        padding-bottom: 5px;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #000;
+    }
+
+    .block.list ul {
+        list-style: none;
+        padding: 0;
+    }
+
+
+    .block.image > .image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .block.image > .caption {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+
+
+
+    .page .content {
+        margin-top: 60px;
+        padding: 20px;
+    }
+
+
+    span.price {
+        color: #4F6D7A;
+    }
+
+
+    .box {
+        background-color: #fff;
+        padding: 20px;
+        margin-bottom: 10px;
+    }
+</style>
+
+<script>
+    $(document).ready(function() {
+        initNavTabs();
+    });
+
+    function initNavTabs() {
+        var tabs = $('.nav-tabs .tab');
+        console.log(tabs);
+
+        tabs.click(function() {
+            console.log('Tab Click');
+        });            
+    }
+</script>
