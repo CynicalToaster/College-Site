@@ -32,13 +32,8 @@
             $this->events[$event] = $target;
         }
 
-        public function init()
+        public function init($url)
         {
-            $url = explode('?', rtrim($_SERVER['REQUEST_URI']))[0];
-
-            traceLog($url);
-            traceLog($this->pages);
-
             if (isset($this->pages[$url]))
             {
                 $page = $this->pages[$url];
@@ -54,10 +49,7 @@
                 exit();
             }
             else
-            {
-                echo '404 Page not found.';
-                exit();
-            }            
+                return false;
         }
     }
 ?>
