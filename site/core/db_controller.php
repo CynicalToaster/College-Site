@@ -8,7 +8,7 @@
             $servername = "localhost";
             $username = "webClient";
             $password = "n4L1BHGgwQGCDzQ3";
-            $dbname = "db_college_site";
+            $dbname = "test";
             
             // Create connection
             self::$connection = new mysqli($servername, $username, $password, $dbname);
