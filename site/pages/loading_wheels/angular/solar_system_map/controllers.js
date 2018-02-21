@@ -19,6 +19,9 @@ var app = angular.module('solarSystemMap.controllers', [])
         createBlades('/site/resources/pole.svg');
         createBlades('/site/resources/blades.svg');
         createBlades('/site/resources/blades.svg');
+        createBlades('/site/resources/ObiWan-02.svg');
+        createBlades('/site/resources/Light Sabre-01.svg');
+        createBlades('/site/resources/Light Sabre-01.svg');
 
 
         function createBlades(svgUrl) {
@@ -40,9 +43,9 @@ var app = angular.module('solarSystemMap.controllers', [])
 
             rotation -= dt * 90;
             for (var i = 0; i < blades.length; i+=3) {
-                blades[i].attr("transform", "translate("+(i * 100 + 100)+",170) rotate("+0+") scale(0.6,0.6) translate(-100,-100)");
-                blades[i + 1].attr("transform", "translate("+(i * 100 + 100)+",100) rotate("+rotation+") translate(-100,-100)");
-                blades[i + 2].attr("transform", "translate("+(i * 100 + 100)+",100) rotate("+rotation+") translate(-100,-100)");
+                blades[i].attr("transform", "translate("+(i * 50 + 100)+",170) rotate("+0+") scale(0.6,0.6) translate(-100,-100)");
+                blades[i + 1].attr("transform", "translate("+(i * 50 + 100)+",100) rotate("+rotation+") translate(-100,-100)");
+                blades[i + 2].attr("transform", "translate("+(i * 50 + 100)+",100) rotate("+rotation+") translate(-100,-100)");
             }
 
             window.requestAnimationFrame(loop);
