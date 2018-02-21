@@ -1,19 +1,4 @@
-<!-- <div class="container">
-    <div data-ng-app="solarSystemMap">
-        <div data-ng-controller="solarSystemMapController">
-            <div data-map></div>
-        </div>
-    </div>
-</div> -->
-<style>
-    #t-shirt-loading {
-        position: absolute;
-        top: 100px;
-        left: 100px;
-    }
-</style>
-
-<!-- <svg id="t-shirt-loading" data-name="T-Shirt Loading" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 2396.34 2192.43">
+<svg id="t-shirt-loading" data-name="T-Shirt Loading" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 2396.34 2192.43">
     <defs>
         <style>
             @keyframes top_left_side {
@@ -251,22 +236,4 @@
             <polygon class="right_side_bottom cls-1" points="1599 1137 1599 1531 1599 2192 1888 2192 1888 1531 1888 1137 1599 1137"/>
         </g>
     </g>
-
-    <g fill="none" fill-rule="evenodd" stroke="#f00">
-        <g transform="translate(1000 1000) scale(10,10)" stroke-width="200">
-            <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
-            <path d="M36 18c0-9.94-8.06-18-18-18">
-                <animateTransform
-                    attributeName="transform"
-                    type="rotate"
-                    from="0 18 18"
-                    to="360 18 18"
-                    dur="1s"
-                    repeatCount="indefinite"/>
-            </path>
-        </g>
-    </g>
-</svg> -->
-
-
-<img src="/site/resources/TShirt/tshirt.svg" /> 
+</svg>
