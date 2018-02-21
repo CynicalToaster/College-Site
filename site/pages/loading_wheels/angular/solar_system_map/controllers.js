@@ -59,8 +59,8 @@ var app = angular.module('solarSystemMap.controllers', [])
         restrict: 'A',
         scope: true,
         template: 
-            '<div class="row">' +
-                '<svg id="map" style="border: 1px solid #f00" data-ng-init="initMap()" xmlns="http://www.w3.org/2000/svg" width="1200" height="250">' +
+            '<div style="width: 800px">' +
+                '<svg id="map" style="border: 1px solid #f00" data-ng-init="initMap()" xmlns="http://www.w3.org/2000/svg" width="800" height="250">' +
                 '</svg>' +
             '</div>'
     };
