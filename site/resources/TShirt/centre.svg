@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="809.94" height="1141.33" viewBox="0 0 809.94 1141.33">
+  <defs>
+    <style>
+      .a {
+        fill: #fff;
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <title>centre</title>
+  <path class="a" d="M1684.47,1324.53V220.36l-120.88-36c0,16.69-127,30.22-283.59,30.22s-283.59-13.53-283.59-30.22l-120.88,36V1324.53Z" transform="translate(-875.03 -183.7)"/>
+</svg>
