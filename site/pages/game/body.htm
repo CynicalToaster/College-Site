@@ -1,0 +1,105 @@
+<style>
+
+</style>
+
+<div class="game">
+    <svg id="game" style="border: 1px solid #f00" xmlns="http://www.w3.org/2000/svg" width="512" height="512"></svg>
+</div>
+
+<script>
+
+    dt = 0;
+    particleSystems = [];
+
+    function createParticleSystem(name, parent, svg, properties) {
+        var particleSystem = {
+            name: name,
+            parent: parent,
+            particleTemplate: '<ellipse rx="5" ry="5" style="fill: rgb(0, 0, 0);"></ellipse>',
+            particles: [],
+            time: 10,
+            numberOfParticles: 100,
+            particleInterval: 10 / 100,
+            timeSinceLastParticle: 0,
+        }
+
+        particleSystems.push(particleSystem);
+    }
+
+    function updateParticleSystems() {
+        for (ps_i = 0; ps_i < particleSystems.length; ps_i++) {
+            var ps = particleSystems[ps_i];
+
+            for (i = 0; i < ps.particles.length; i++) {
+                var p = ps.particles[i];
+
+                p.lifeTime -= dt;
+
+                if (p.lifeTime > 0) {
+                
+                    p.velocity.x += dt * 100;
+                    p.velocity.y *= 0.99;
+
+                    p.position.x += dt * p.velocity.x;
+                    p.position.y += dt * p.velocity.y;
+
+                    p.size.x += dt * (10 + (p.size.x * 0.4));
+                    p.size.y += dt * (10 + (p.size.x * 0.4));
+                    
+                    p.particle.center(p.position.x, p.position.y);
+                    p.particle.radius(p.size.x, p.size.y);
+
+                } else {
+
+                    p.particle.remove();
+                    ps.particles.splice(i, 1);
+                    console.log(ps);
+
+                }
+            }
+            
+            ps.timeSinceLastParticle += dt;
+            if (ps.timeSinceLastParticle >= ps.particleInterval) {
+                ps.timeSinceLastParticle = 0;
+                console.log('Create Particle');
+
+                var new_particle = {
+                    lifeTime: 4,
+                    velocity: {x:0, y:-100},
+                    position: {x:0, y:0},
+                    size: {x:0, y:0},
+                    particle: ps.parent.ellipse(0,0).radius(0,0).fill('#888').opacity(0.5)
+                }
+
+                ps.particles.push(new_particle);
+            }
+
+        }
+    }
+
+    game_svg = SVG('game');
+
+    var group1 = game_svg.group()
+                        .move(200, 400)
+    var group2 = game_svg.group()
+                        .move(250, 380)
+    var group3 = game_svg.group()
+                        .move(300, 400)
+
+    createParticleSystem('test1', group1, game_svg, {});
+    createParticleSystem('test2', group2, game_svg, {});
+    createParticleSystem('test3', group3, game_svg, {});
+
+
+    var last_time = 0;
+    function loop(cur_time)
+    {
+        dt = (cur_time - last_time) * 0.001;
+        last_time = cur_time;
+
+        updateParticleSystems();
+
+        window.requestAnimationFrame(loop);
+    }
+    window.requestAnimationFrame(loop);
+</script>

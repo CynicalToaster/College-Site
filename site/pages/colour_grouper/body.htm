@@ -1,0 +1,98 @@
+<?
+    $colors = array(
+        "black" => array(0,0,0),
+        "white" => array(255,255,255),
+
+        "red" => array(255,0,0),
+        "green" => array(0,255,0),
+        "blue" => array(0,0,255),
+
+        "yellow" => array(255,255,0),
+        "teal" => array(0,255,255),
+        "pink" => array(255,0,255),
+
+        "tan" => array(209,181,139),
+    );
+    
+    $value = "#DDAB28";
+    
+    function html2rgb($color)
+    {
+        if ($color[0] == '#')
+            $color = substr($color, 1);
+    
+        if (strlen($color) == 6)
+            list($r, $g, $b) = array($color[0].$color[1],
+                                     $color[2].$color[3],
+                                     $color[4].$color[5]);
+        elseif (strlen($color) == 3)
+            list($r, $g, $b) = array($color[0].$color[0],
+                $color[1].$color[1], $color[2].$color[2]);
+        else
+            return false;
+    
+        $r = hexdec($r); $g = hexdec($g); $b = hexdec($b);
+    
+        return array($r, $g, $b);
+    }
+    
+    function distancel2(array $color1, array $color2) {
+        return sqrt(pow($color1[0] - $color2[0], 2) +
+            pow($color1[1] - $color2[1], 2) +
+            pow($color1[2] - $color2[2], 2));
+    }
+    
+    $distances = array();
+    $val = html2rgb($value);
+print_r($val);
+    foreach ($colors as $name => $c) {
+        $distances[$name] = distancel2($c, $val);
+    }
+    
+    $mincolor = "";
+    $minval = pow(2, 30); /*big value*/
+    foreach ($distances as $k => $v) {
+        if ($v < $minval) {
+            $minval = $v;
+            $mincolor = $k;
+        }
+    }
+    
+    echo "Closest color: $mincolor\n";
+
+
+
+    function hexToRgb($hex)
+    {
+        return sscanf($hex, '#%02x%02x%02x');
+    }
+
+    function rgbToHsv($rgb)
+    {
+        $rgb[0] /= 255;
+        $rgb[1] /= 255;
+        $rgb[2] /= 255;
+
+        $max = Math.max(r, g, b), min = Math.min(r, g, b);
+        $h, s, v = max;
+      
+        $d = max - min;
+        $s = max == 0 ? 0 : d / max;
+      
+        if ($max == $min) {
+          $h = 0; // achromatic
+        } else {
+          switch ($max) {
+            case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+            case g: h = (b - r) / d + 2; break;
+            case b: h = (r - g) / d + 4; break;
+          }
+      
+          $h /= 6;
+        }
+      
+        return array($h, $s, $v);
+    }
+
+    print_r(hexToRGB('#ff00aa'));
+?>

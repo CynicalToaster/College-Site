@@ -1,0 +1,72 @@
+<style>
+    .accordian-item {
+        border: 1px solid #f00;
+
+        padding: 10px;
+    }
+    .accordian-item .accordian-header {
+        border: 1px solid #0f0;
+
+        padding: 20px;
+        margin: 0;
+    }
+    .accordian-item .accordian-content {
+        border: 1px solid #00f;
+        overflow: hidden;
+
+        transition: height 0.2s ease-in-out;
+    }
+    .accordian-item .accordian-content-inner {
+        padding: 20px;
+    }
+
+    .container-fluid {
+        padding: 0;
+    }
+
+    .category-page .category-name {
+        font-size: 20px;
+        padding: 20px;
+        margin: 0;
+    }
+    .category-page .category-filters > button {
+        float: left;
+        width: 50%;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        background-color: #fff;
+        cursor: pointer;
+    }
+    .category-page .category-filters > button:hover {
+        /* background-color: #ddd; */
+    }
+</style>
+
+<div class="container-fluid no-padding" data-ng-app="store">
+    <div class="category-page" data-ng-controller="productController">
+
+        
+        <!-- Title -->
+        <div class="row-fluid">
+            <h1 class="category-name">Men's Bestsellers</h1>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="row-fluid category-filters">
+            <button>Sort By</button>
+            <button>Filter By</button>
+        </div>
+
+        <!-- Products Found -->
+        <div class="row-fluid">
+            <span>28 Products Found</span>
+        </div>
+
+        <!-- Product List -->
+        <div class="row-fluid">
+        </div>
+
+
+    </div>
+</div>

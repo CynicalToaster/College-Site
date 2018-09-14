@@ -1,0 +1,75 @@
+<title>Theme - College Site</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="/site/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/site/resources/css/font-awesome.min.css">
+
+<script src="/site/resources/js/jquery-3.2.1.min.js"></script>
+<script src="/site/resources/js/popper.min.js"></script>
+<script src="/site/resources/js/bootstrap.min.js"></script>
+<script src="/site/resources/js/svg.min.js"></script>
+<script src="/site/resources/js/angular.min.js"></script>
+
+<script>
+    function randomRange(min, max) {
+        return Math.floor((Math.random() * ((max - min) + 1)) + min);
+    }
+
+    function gaussianRand(spread) {
+        var rand = 0;
+
+        for (var i = 0; i < spread; i += 1) {
+            rand += Math.random();
+        }
+
+        return (rand / spread) * 2 - 1;
+    }
+
+    function invertDistribution(val) {
+        if (val < 0) {
+            return -1 - val;
+        } else if (val > 0) {
+            return 1 - val;
+        } else {
+            return val;
+        }
+    }
+
+    function length(vector) {
+        return Math.sqrt(Math.pow(vector[0],2) + Math.pow(vector[1],2));
+    }
+
+    function inCircle() {
+        var point = [0,0];
+
+        do {
+            point = [gaussianRand(1),gaussianRand(2)];
+        } while (length(point) > 1);
+
+        return point;
+    }
+
+
+    function increase_brightness(hex, percent){
+        // strip the leading # if it's there
+        hex = hex.replace(/^\s*#|\s*$/g, '');
+
+        // convert 3 char codes --> 6, e.g. `E0F` --> `EE00FF`
+        if(hex.length == 3){
+            hex = hex.replace(/(.)/g, '$1$1');
+        }
+
+        var r = parseInt(hex.substr(0, 2), 16),
+            g = parseInt(hex.substr(2, 2), 16),
+            b = parseInt(hex.substr(4, 2), 16);
+
+        var result = '#' +
+            ((0|(1<<8) + r + (256 - r) * percent / 100).toString(16)).substr(1) +
+            ((0|(1<<8) + g + (256 - g) * percent / 100).toString(16)).substr(1) +
+            ((0|(1<<8) + b + (256 - b) * percent / 100).toString(16)).substr(1);
+
+        return result;
+    }
+
+</script>
